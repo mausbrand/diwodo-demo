@@ -1,0 +1,13 @@
+*.pyc
+*.log
+*.bak
+*.bat
+
+.venv
+.idea
+.vscode
+
+deploy/admin
+node_modules
+
+storage

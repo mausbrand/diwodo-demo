@@ -1,0 +1,41 @@
+runtime: python312
+
+# (1) Under some circumstances, you need to set a higher instance_class,
+#     like F2 or F4. Unfortunately, this will increase App Engine cost,
+#     see https://cloud.google.com/appengine/pricing.
+instance_class: F1
+default_expiration: "30s"
+
+# (2) To get more memory and concurrent requests, a separate gunicorn is run.
+entrypoint: gunicorn -b :$PORT -w 1 --threads 2 --disable-redirect-access-to-syslog main:app
+
+# (3) Limited scaling is default, to keep frontend instance hours low.
+#     Please change these values on your demands.
+automatic_scaling:
+  # max_concurrent_requests: 10
+  max_instances: 1
+  max_idle_instances: 1
+
+# (4) Required for viur-core >= 3.6
+app_engine_apis: true
+
+# (5) Default handlers for ViUR. Add project-specific handlers if wanted.
+handlers:
+- url: /vi/s
+  static_dir: admin
+- url: /static
+  static_dir: static
+- url: /scriptor/(.+)$
+  static_files: scriptor/\1
+  upload: scriptor/.+$
+- url: /resources
+  static_dir: viur/core/resources
+- url: /favicon.png
+  static_files: static/meta/favicon.png
+  upload: favicon.png
+- url: /robots.txt
+  static_files: static/meta/robots.txt
+  upload: robots.txt
+
+inbound_services:
+- warmup

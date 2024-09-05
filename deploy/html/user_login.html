@@ -1,0 +1,39 @@
+{% extends "viur_base.html" %}
+{%- set req = requestParams() -%}
+
+
+{% block content %}
+	<h1 class="headline">Login</h1>
+
+	{% if loginFailed %}
+		<div class="msg msg--error is-active">
+			{{ embedSvg("icon-cross") }}
+			<div class="msg-content">
+				<h3 class="msg-headline">Login failed!</h3>
+				<p>Username or Password was wrong. Please try it again or <a href="/user/auth_userpassword/pwrecover">reset your Password</a>.</p>
+			</div>
+		</div>
+	{% endif %}
+
+	<form method="POST" action="/user/auth_userpassword/login">
+		<input name="skey" type="hidden" value="{{ getSecurityKey() }}">
+
+		<div class="input-group">
+			<label class="label js-focus" for="name">E-Mail</label>
+			<input class="input" id="name" name="name" type="text" placeholder="E-Mail">
+		</div>
+
+		<div class="input-group">
+			<label class="label" for="password">Password</label>
+			<input class="input" id="password" name="password" type="password" placeholder="Passwort">
+		</div>
+
+		<input class="btn btn--primary" name="submit" type="submit" value="Login">
+	</form>
+
+	{% if not req.get("disableGoogle") %}
+		<a class="btn btn--google" href="/user/auth_googleaccount/login">Or Login with Google…</a>
+	{% endif %}
+
+	<a href="/user/auth_userpassword/pwrecover">Reset password</a>
+{% endblock %}

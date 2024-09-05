@@ -1,0 +1,25 @@
+{
+    "cli-version": "2.0.3",
+    "default": {
+        "application_name": "diwodo-demo-viur3",
+        "builds": {
+            "admin": {
+                "command": "viur package install admin",
+                "kind": "exec",
+                "version": "4.4.7"
+            },
+            "npm": {
+                "command": "build",
+                "kind": "npm",
+                "source": ""
+            }
+        },
+        "distribution_folder": "./deploy",
+        "sources_folder": "./sources",
+        "version": "$(year)-$(month)-$(day)-$(user)-dev"
+    },
+    "format": "2.0.0",
+    "live": {
+        "version": "$(year)-$(month)-$(day)-$(user)"
+    }
+}
