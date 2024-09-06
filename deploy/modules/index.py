@@ -1,4 +1,4 @@
-from viur.core import current, errors, exposed, Module
+from viur.core import conf, current, errors, exposed, Module
 
 
 class Index(Module):
@@ -20,15 +20,8 @@ class Index(Module):
         if len(args) == 1 and args[0] == "sitemap.xml":
             return self.sitemap_xml()
 
-        # Else, render index.html
-        template = self.render.getEnv().get_template("index.html")
-        return template.render()
+        return conf.main_app.todo.add()
 
     @exposed
     def scriptor(self):
         raise errors.Redirect("/scriptor/index.html")
-
-    @exposed
-    def sitemap_xml(self, *args, **kwargs):
-        current.request.get().response.headers["Content-Type"] = "text/xml"
-        return self.render.view({}, tpl="sitemap")
