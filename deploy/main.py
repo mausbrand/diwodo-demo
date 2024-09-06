@@ -221,8 +221,8 @@ securityheaders.addCspRule("connect-src", "api.github.com", "enforce")
 # Server startup
 #
 
-import modules
-import render
+import modules  # noqa
+import render  # noqa
 
 # core.setDefaultLanguage("de")
 app = setup(modules, render)
