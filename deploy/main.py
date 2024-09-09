@@ -221,13 +221,12 @@ securityheaders.addCspRule("connect-src", "api.github.com", "enforce")
 # VueJS development
 #
 
-# if conf.instance.is_dev_server:
-#     def vuejs_cors_allow_all(path):
-#         current.request.get().response.headers["Access-Control-Allow-Origin"] = "http://localhost:8081"
-#         current.request.get().response.headers["Access-Control-Allow-Credentials"] = "true"
-#         return path
-#
-#     conf.request_preprocessor = vuejs_cors_allow_all
+if conf.instance.is_dev_server:
+    def vuejs_cors_allow_all(path):
+        current.request.get().response.headers["Access-Control-Allow-Origin"] = "http://localhost:8081"
+        current.request.get().response.headers["Access-Control-Allow-Credentials"] = "true"
+        return path
+    conf.request_preprocessor = vuejs_cors_allow_all
 
 # ------------------------------------------------------------------------------
 # Server startup

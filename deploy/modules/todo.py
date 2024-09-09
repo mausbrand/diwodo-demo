@@ -24,4 +24,6 @@ class Todo(List):
         return True  # everyone can add entries!
 
 
+
 Todo.html = True
+Todo.json=True

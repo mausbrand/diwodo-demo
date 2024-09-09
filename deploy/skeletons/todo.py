@@ -22,3 +22,12 @@ class TodoSkel(skeleton.Skeleton):
         required=True,
         validHtml=None,
     )
+    status = SelectBone(
+        descr="Status",
+        required=True,
+        defaultValue="open",
+        values={
+            "open":"Offen",
+            "closed":"Geschlossen"
+        }
+    )

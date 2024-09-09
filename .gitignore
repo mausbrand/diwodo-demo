@@ -11,3 +11,5 @@ deploy/admin
 node_modules
 
 storage
+sources/app/public/shoelace
+deploy/app

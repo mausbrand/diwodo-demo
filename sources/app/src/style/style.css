@@ -1,0 +1,24 @@
+@import url('@viur/ignite/ignite.css');
+@import 'variables';
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  hyphens: auto;
+  font-size: var(--ignt-font-size-medium);
+}
+
+body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+#app {
+  height: 100%;
+}

@@ -21,6 +21,8 @@ app_engine_apis: true
 
 # (5) Default handlers for ViUR. Add project-specific handlers if wanted.
 handlers:
+- url: /app
+  static_dir: app
 - url: /vi/s
   static_dir: admin
 - url: /static
