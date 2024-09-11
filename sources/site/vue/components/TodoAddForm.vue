@@ -32,6 +32,7 @@
 </template>
 <script setup>
 import {ref, reactive, computed} from 'vue'
+
 import ViForm from '@viur/vue-utils/forms/ViForm.vue'
 const addform = ref(null)
 const state = reactive({
@@ -54,6 +55,7 @@ function sendForm(){
     if (data['action']==="addSuccess"){
       state.wasSuccess = true
       addform.value.state.skel = {} // clears form
+      window.location.href = "/todo/add?style=success"
     }
   })
 }
