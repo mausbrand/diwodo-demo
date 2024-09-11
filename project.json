@@ -12,6 +12,11 @@
                 "command": "build",
                 "kind": "npm",
                 "source": "app"
+            },
+            "site": {
+                "command": "build",
+                "kind": "npm",
+                "source": "site"
             }
         },
         "distribution_folder": "./deploy",

@@ -1,0 +1,25 @@
+{% set development = False %}
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {%- block additionalhead %}
+
+        {% endblock %}
+
+        {%- if development %}
+            <script type="module" src="http://localhost:8081/@vite/client"></script>
+            <script type="module" src="http://localhost:8081/main.js"></script>
+        {% else %}
+            {{inject_vite()}}
+        {% endif %}
+      </head>
+    <body>
+        <div id="vite_context">
+            {%- block content %}
+
+            {% endblock %}
+        </div>
+    </body>
+</html>

@@ -1,0 +1,76 @@
+<template>
+  <div class="wrapper">
+    <sl-alert v-if="state.wasSuccess" open variant="success" duration="3000" @sl-hide="state.wasSuccess=false">
+      <sl-icon slot="icon" name="check2-circle"></sl-icon>
+      <span>Your changes have been saved</span>
+    </sl-alert>
+
+    <div>
+      <sl-spinner v-if="state.formLoading"></sl-spinner>
+      <vi-form
+          ref="addform"
+          module="todo"
+          action="add"
+          :useCategories="false"
+      >
+      </vi-form>
+    </div>
+
+    <sl-bar>
+
+      <div slot="right">
+        <sl-button variant="success" @click="sendForm" :loading="state.sending">
+          <sl-icon name="floppy2" slot="prefix"></sl-icon>
+          Anlegen
+        </sl-button>
+      </div>
+    </sl-bar>
+
+  </div>
+
+
+</template>
+<script setup>
+import {ref, reactive, computed} from 'vue'
+import ViForm from '@viur/vue-utils/forms/ViForm.vue'
+const addform = ref(null)
+const state = reactive({
+  sending:undefined,
+  wasSuccess:false,
+  formLoading:computed(()=>{
+    if (!addform.value){
+      return true
+    }
+    return addform.value.state.loading
+  })
+})
+
+
+function sendForm(){
+  state.sending = true
+  addform.value.sendData().then(async (resp)=>{
+    let data = await resp.json()
+    state.sending = undefined
+    if (data['action']==="addSuccess"){
+      state.wasSuccess = true
+      addform.value.state.skel = {} // clears form
+    }
+  })
+}
+
+
+</script>
+<style scoped>
+.wrapper{
+  display:flex;
+  flex-direction: column;
+  gap:20px;
+}
+sl-alert{
+
+  & span{
+    font-weight: bold;
+  }
+
+}
+</style>

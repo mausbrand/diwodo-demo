@@ -13,3 +13,34 @@ def gen_postProcessAppObj(renderer):
 
 
 json._postProcessAppObj = gen_postProcessAppObj(json)
+
+
+import typing as t
+import json as _json
+import logging
+from viur.core.render.html.utils import jinjaGlobalFunction
+@jinjaGlobalFunction
+def inject_vite(render) -> t.Any:
+    """build vue imports from manifest"""
+
+    vite_path = "/static/site"
+
+    try:
+        fd = open(f"static/site/.vite/manifest.json", "r")
+        manifest = _json.load(fd)
+    except:
+        raise Exception(
+            f"Vite manifest file not found or invalid. Maybe your {vite_path}/.vite/manifest.json file is empty?"
+        )
+    imports_files = ""
+    if "imports" in manifest["index.html"]:
+        imports_files = "".join(
+            [
+                f'<script type="module" src="{vite_path}/{manifest[file]["file"]}"></script>'
+                for file in manifest["index.html"]["imports"]
+            ]
+        )
+
+    return f"""<script type="module" src="{vite_path}/{manifest['index.html']['file']}"></script>
+        <link rel="stylesheet" type="text/css" href="{vite_path}/{manifest['index.html']['css'][0]}" />
+        {imports_files}"""

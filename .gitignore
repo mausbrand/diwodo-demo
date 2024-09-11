@@ -13,3 +13,5 @@ node_modules
 storage
 sources/app/public/shoelace
 deploy/app
+deploy/static/site
+sources/site/public/shoelace
