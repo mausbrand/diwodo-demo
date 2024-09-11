@@ -4,14 +4,16 @@ import { defineConfig } from 'vite'
 import copy from "rollup-plugin-copy"
 import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
+import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
 
-console.log(__dirname)
 
 
 const APPNAME = "site"
 
 
 function ViurWatcher(options = { filePaths: [] }) {
+  /* Observe non vite folder for auto full-reload, can be disabled in config
+  */
   return {
     name: 'viurwatcher',
     configureServer(server) {
@@ -37,6 +39,9 @@ export default defineConfig({
   runtimeCompiler:true,
 
   plugins: [
+    ViteImageOptimizer({
+      logStats:false
+    }),
     copy({
       targets: [
         {
@@ -53,6 +58,7 @@ export default defineConfig({
       }
     }),
     vueDevTools(),
+
     ViurWatcher({filePaths:["../../deploy/html"]})
   ],
   resolve: {
