@@ -162,6 +162,8 @@ conf.admin.name = \
 # GitHub Buttons
 securityheaders.addCspRule("style-src", "unsafe-inline", "enforce")  # yes, GitHub buttons need this...
 securityheaders.addCspRule("script-src", "buttons.github.io", "enforce")
+securityheaders.addCspRule("script-src", "unsafe-eval", "enforce")
+securityheaders.addCspRule("connect-src", "data:", "enforce")
 securityheaders.addCspRule("connect-src", "api.github.com", "enforce")
 
 # Enable this if you want to use the captcha, but not unsafe-inline:
@@ -222,6 +224,9 @@ securityheaders.addCspRule("connect-src", "api.github.com", "enforce")
 #
 
 if conf.instance.is_dev_server:
+    securityheaders.addCspRule("script-src", "http://localhost:8081", "enforce")
+    securityheaders.addCspRule("connect-src", "ws://localhost:8081", "enforce")
+    securityheaders.addCspRule("img-src", "http://localhost:8081", "enforce")
     def vuejs_cors_allow_all(path):
         current.request.get().response.headers["Access-Control-Allow-Origin"] = "http://localhost:8081"
         current.request.get().response.headers["Access-Control-Allow-Credentials"] = "true"
