@@ -46,4 +46,4 @@ import '@viur/shoelace/dist/components/bar/bar'
 import { setBasePath, getBasePath } from '@viur/shoelace/dist/utilities/base-path'
 import { registerIconLibrary } from '@viur/shoelace/dist/utilities/icon-library.js'
 
-setBasePath(`app/shoelace`)
+setBasePath(`shoelace`)
