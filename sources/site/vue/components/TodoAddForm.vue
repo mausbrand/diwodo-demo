@@ -10,10 +10,9 @@
       <vi-form
           ref="addform"
           module="todo"
-          action="edit"
+          action="add"
           :useCategories="false"
           :layout="TodoAddFormLayout"
-
       >
       </vi-form>
     </div>
@@ -31,7 +30,7 @@
 <script setup>
 /*
 
-:layout="TodoAddFormLayout"
+
 :useCategories="false"
 
 

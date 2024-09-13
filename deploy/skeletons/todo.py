@@ -21,7 +21,7 @@ class TodoSkel(skeleton.Skeleton):
         descr="Nachricht",
         required=True,
         validHtml=None,
-        params={"visibleIf":"""lastname=='Brose'"""}
+        params={"visibleIf":"""lastname!='Brose'"""}
     )
 
     file = FileBone(descr="Datei")
