@@ -9,7 +9,7 @@ class TodoSkel(skeleton.Skeleton):
 
     lastname = StringBone(
         descr="Nachname",
-        required=True,
+        required=True
     )
 
     subject = StringBone(
@@ -21,7 +21,10 @@ class TodoSkel(skeleton.Skeleton):
         descr="Nachricht",
         required=True,
         validHtml=None,
+        params={"visibleIf":"""lastname=='Brose'"""}
     )
+
+    file = FileBone(descr="Datei")
 
     status = SelectBone(
         descr="Status",

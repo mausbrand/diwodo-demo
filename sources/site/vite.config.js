@@ -6,10 +6,7 @@ import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
 
-
-
 const APPNAME = "site"
-
 
 function ViurWatcher(options = { filePaths: [] }) {
   /* Observe non vite folder for auto full-reload, can be disabled in config

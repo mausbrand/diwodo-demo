@@ -7,7 +7,6 @@
   font-size: var(--ignt-font-size-medium);
 }
 
-
 body {
   margin: 0;
   display: flex;
@@ -25,4 +24,8 @@ h1{
   font-weight: bold;
   font-size: var(--sl-font-size-x-large);
   padding:var(--sl-spacing-medium) 0;
+}
+
+:not(:defined) {
+  visibility: hidden;
 }

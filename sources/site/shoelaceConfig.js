@@ -20,6 +20,7 @@ import( '@viur/shoelace/dist/components/option/option')
 
 // Project
 import( '@viur/shoelace/dist/components/bar/bar')
+import( '@viur/shoelace/dist/components/card/card')
 
 
 

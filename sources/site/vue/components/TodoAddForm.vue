@@ -10,14 +10,15 @@
       <vi-form
           ref="addform"
           module="todo"
-          action="add"
+          action="edit"
           :useCategories="false"
+          :layout="TodoAddFormLayout"
+
       >
       </vi-form>
     </div>
 
     <sl-bar>
-
       <div slot="right">
         <sl-button variant="success" @click="sendForm" :loading="state.sending">
           <sl-icon name="floppy2" slot="prefix"></sl-icon>
@@ -25,14 +26,18 @@
         </sl-button>
       </div>
     </sl-bar>
-
   </div>
-
-
 </template>
 <script setup>
-import {ref, reactive, computed} from 'vue'
+/*
 
+:layout="TodoAddFormLayout"
+:useCategories="false"
+
+
+*/
+import {ref, reactive, computed} from 'vue'
+import TodoAddFormLayout from './TodoAddFormLayout.vue';
 import ViForm from '@viur/vue-utils/forms/ViForm.vue'
 const addform = ref(null)
 const state = reactive({
@@ -55,7 +60,7 @@ function sendForm(){
     if (data['action']==="addSuccess"){
       state.wasSuccess = true
       addform.value.state.skel = {} // clears form
-      window.location.href = "/todo/add?style=success"
+      //window.location.href = "/todo/add?style=success"
     }
   })
 }
