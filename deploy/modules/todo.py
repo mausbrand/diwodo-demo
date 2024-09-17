@@ -28,7 +28,7 @@ class Todo(List):
 
     def addSkel(self):
         # TODO: new skel.sub_skel() feature!
-        skel = self.addSkel().clone()
+        skel = super().addSkel().clone()
         skel.status = None
         return skel
 
