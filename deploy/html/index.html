@@ -1,0 +1,44 @@
+{% extends "template.html" %}
+
+{% block content %}
+    <div class="wrapper-center">
+        <div class="content">
+            <h1>Hausverwaltung</h1>
+            <div class="wrapper-entrypoint">
+                <sl-card class="entrypoint" id="form">
+                    <a href="/todo/add" target="_blank">
+                        <div class="wrapper-card">
+                            <sl-icon name="plus-square-fill" ></sl-icon>
+                            <span>Zum Serviceformular</span>
+                        </div>
+                    </a>
+                </sl-card>
+
+                <sl-card class="entrypoint" id="admin">
+                    <a href="/vi" target="_blank">
+                        <div class="wrapper-card">
+                            <sl-icon name="person-fill-gear" ></sl-icon>
+                            <span>Administration der Hausverwaltung</span>
+                        </div>
+                    </a>
+                </sl-card>
+
+                <sl-card class="entrypoint"  id="app">
+                    <a href="/app/index.html" target="_blank">
+                        <div class="wrapper-card">
+                            <sl-icon name="list-task" ></sl-icon>
+                            <span>Servicetechniker:innen App</span>
+                        </div>
+                    </a>
+
+                </sl-card>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+{% endblock %}

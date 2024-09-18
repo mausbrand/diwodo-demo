@@ -1,0 +1,66 @@
+.wrapper-center{
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  height: 100%;
+  background-image: url("@@/images/login-background.jpg");
+  background-blend-mode:color-dodge;
+  background-color: var(--sl-color-neutral-300);
+
+
+  & h1{
+    font-size: var(--sl-font-size-2x-large);
+    color:black;
+  }
+
+  & .wrapper-entrypoint{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap:80px;
+  }
+}
+
+sl-card.entrypoint{
+  cursor: pointer;
+  font-size: var(--sl-font-size-x-large);
+  color:white;
+  text-align: center;
+  width:400px;
+  height: 300px;
+
+  & a{
+    color:white;
+  }
+
+  & .wrapper-card{
+    display:grid;
+    place-items: center;
+    height: 100%;
+  }
+
+  & sl-icon{
+    width: 5rem;
+    height: 5rem;
+  }
+
+  &::part(base){
+    height: 100%;
+    background: linear-gradient(125deg, hsl(12, 100%, 61%), hsl(356, 86%, 44%));
+    backdrop-filter: blue(10px);
+    border: 1px solid hsl(356, 86%, 44%);
+    border-radius: var(--sl-border-radius-x-large);
+    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.5);
+    transition: all 0.2s ease-in-out;
+  }
+
+  &::part(base):hover{
+    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.8);
+  }
+
+  &::part(body){
+    height: 100%;
+  }
+
+
+}

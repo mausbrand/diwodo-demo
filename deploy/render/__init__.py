@@ -20,8 +20,12 @@ import json as _json
 import logging
 from viur.core.render.html.utils import jinjaGlobalFunction
 @jinjaGlobalFunction
-def inject_vite(render) -> t.Any:
+def inject_vite(render, development: bool = False) -> t.Any:
     """build vue imports from manifest"""
+
+    if development:
+        return """<script type="module" src="http://localhost:8081/@vite/client"></script>
+                  <script type="module" src="http://localhost:8081/main.js"></script>"""
 
     vite_path = "/static/site"
 
