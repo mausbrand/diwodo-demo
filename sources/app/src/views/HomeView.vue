@@ -14,5 +14,9 @@ import UserBar from '@/components/UserBar.vue'
   display:flex;
   flex-direction: column;
   gap:20px;
+  height:100%;
+  background-image: url("/login-background.jpg");
+  background-blend-mode:color-dodge;
+  background-color: var(--sl-color-neutral-300);
 }
 </style>

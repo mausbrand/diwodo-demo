@@ -16,7 +16,11 @@
       </slot>
     </div>
 
-    <h2 class="headline">Ihr Anliegen</h2>
+    <slot boneName="reason"
+          :widget="getBoneWidget(formState.structure['reason']['type'])"
+          label="top"
+    >
+    </slot>
     <slot boneName="subject"
           :widget="getBoneWidget(formState.structure['subject']['type'])"
           label="hide"
@@ -29,11 +33,6 @@
     >
     </slot>
 
-    <slot boneName="file"
-          :widget="getBoneWidget(formState.structure['file']['type'])"
-          label="top"
-    >
-    </slot>
 
   </sl-card>
 
@@ -54,6 +53,10 @@ const formUpdate = inject("formUpdate")
 
 :deep(.bone-wrapper) {
   & sl-input::part(base) {
+    border-radius: var(--sl-input-border-radius-medium);
+  }
+
+  & sl-select::part(combobox) {
     border-radius: var(--sl-input-border-radius-medium);
   }
 }

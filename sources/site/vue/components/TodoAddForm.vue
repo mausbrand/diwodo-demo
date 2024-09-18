@@ -2,11 +2,11 @@
   <div class="wrapper">
     <sl-alert v-if="state.wasSuccess" open variant="success" duration="3000" @sl-hide="state.wasSuccess=false">
       <sl-icon slot="icon" name="check2-circle"></sl-icon>
-      <span>Your changes have been saved</span>
+      <span>Vielen Dank für Ihre Rückmeldung.</span>
     </sl-alert>
 
-    <div>
-      <sl-spinner v-if="state.formLoading"></sl-spinner>
+    <div >
+      <loader v-if="state.formLoading"></loader>
       <vi-form
           ref="addform"
           module="todo"
@@ -21,7 +21,7 @@
       <div slot="right">
         <sl-button variant="success" @click="sendForm" :loading="state.sending">
           <sl-icon name="floppy2" slot="prefix"></sl-icon>
-          Anlegen
+          Senden
         </sl-button>
       </div>
     </sl-bar>
@@ -36,6 +36,7 @@
 
 */
 import {ref, reactive, computed} from 'vue'
+import loader from '@viur/vue-utils/generic/Loader.vue'
 import TodoAddFormLayout from './TodoAddFormLayout.vue';
 import ViForm from '@viur/vue-utils/forms/ViForm.vue'
 const addform = ref(null)
@@ -71,6 +72,9 @@ function sendForm(){
   display:flex;
   flex-direction: column;
   gap:20px;
+  & > div{
+    position:relative;
+  }
 }
 sl-alert{
 

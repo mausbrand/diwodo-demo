@@ -1,8 +1,17 @@
-from viur.core import skeleton
+from viur.core import skeleton, utils
 from viur.core.bones import *
 
 
 class TodoSkel(skeleton.Skeleton):
+    creationdate = DateBone(
+        descr="Erstellt am",
+        readOnly=True,
+        visible=False,
+        indexed=True,
+        compute=Compute(fn=utils.utcNow, interval=ComputeInterval(ComputeMethod.Once)),
+    )
+
+
     firstname = StringBone(
         descr="Vorname",
     )
@@ -11,6 +20,12 @@ class TodoSkel(skeleton.Skeleton):
         descr="Nachname",
         required=True,
     )
+
+    reason = SelectBone(descr="Thema", values={
+        "billing":"Abrechnung",
+        "question":"Anfrage",
+        "service":"Service"
+    },defaultValue="question")
 
     subject = StringBone(
         descr="Anliegen",
@@ -23,6 +38,7 @@ class TodoSkel(skeleton.Skeleton):
         validHtml=None,
     )
 
+
     status = SelectBone(
         descr="Status",
         required=True,
@@ -34,6 +50,6 @@ class TodoSkel(skeleton.Skeleton):
         }
     )
 
-    # user = UserBone(
-    #     descr="Zugewiesen an",
-    # )
+    user = UserBone(
+         descr="Zugewiesen an",
+    )

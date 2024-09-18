@@ -1,109 +1,94 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper-list">
   <sl-bar>
     <div slot="left">
-      <h1 class="headline">Meine Todo's</h1>
+      <h1 class="headline">Aktuelle Aufgaben</h1>
     </div>
 
     <div slot="right">
-      <sl-select
-        hoist
-        @sl-change="updatefilter"
-        :value="null"
-      >
-        <sl-option
-          :key="null"
+      <sl-button-group>
+        <sl-select
+          hoist
+          @sl-change="updatefilter"
           :value="null"
-          >Alle</sl-option
         >
-        <sl-option
-          v-for="(val, akey) in todoListHandler.structure?.['status']?.['values']"
-          :key="akey"
-          :value="akey"
-        >
-          {{ val }}
-        </sl-option>
-      </sl-select>
-      <sl-button @click="reload">
-        <sl-icon name="arrow-repeat"></sl-icon>
-      </sl-button>
+          <sl-option
+            :key="null"
+            :value="null"
+            >Alle</sl-option
+          >
+          <sl-option
+            v-for="(val, akey) in todoListHandler.structure?.['status']?.['values']"
+            :key="akey"
+            :value="akey"
+          >
+            {{ val }}
+          </sl-option>
+        </sl-select>
+        <sl-button @click="reload" title="Tabelle neuladen">
+          <sl-icon name="arrow-repeat"></sl-icon>
+        </sl-button>
+    </sl-button-group>
     </div>
   </sl-bar>
-
-  <table>
+  <sl-card>
+  <loader v-if="todoListHandler.state.skellist.length===0"></loader>
+  <table v-else>
     <thead>
       <tr>
-        <th
-          v-for="(bone, boneName) in todoListHandler.structure"
-          :key="boneName"
+        <template  v-for="(bone, boneName) in todoListHandler.structure"
+        :key="boneName">
+        <th v-if="state.visibleBones.includes(boneName)"
+        :style="{
+          width: ['message'].includes(boneName)?'600px':'200px'
+        }"
         >
           {{ bone['descr'] }}
         </th>
+        </template>
+
       </tr>
     </thead>
     <tbody>
       <tr
         v-for="(skel, idx) in todoListHandler.state.skellist"
         :key="idx"
+        :class="{
+          closed:skel['status']==='closed',
+          pending:skel['status']==='pending',
+        }"
       >
-        <td v-for="(value, boneName) in skel">
-          <template v-if="boneName === 'status'">
-            <sl-spinner v-if="state.loadingEntry"></sl-spinner>
-            <sl-select
-              v-else
-              hoist
-              :value="value"
-              @sl-change="updateStatus($event, skel)"
-            >
-              <sl-option
-                v-for="(val, akey) in todoListHandler.structure[boneName]['values']"
-                :key="akey"
-                :value="akey"
-              >
-                {{ val }}
-              </sl-option>
-            </sl-select>
-          </template>
-          <template v-else>
-            {{ value }}
-          </template>
-        </td>
+        <template v-for="(value, boneName) in skel">
+          <td v-if="state.visibleBones.includes(boneName)">
+            <to-do-list-cell :boneName="boneName" :skel="skel"></to-do-list-cell>
+          </td>
+      </template>
       </tr>
     </tbody>
   </table>
+</sl-card>
 </div>
 </template>
 <script setup>
 import { ListRequest, Request } from '@viur/vue-utils'
-import { onMounted, reactive } from 'vue'
+import Loader from '@viur/vue-utils/generic/Loader.vue';
+import { onMounted, reactive, provide } from 'vue'
 import { getBoneWidget } from '@viur/vue-utils/bones/edit/index'
+import ToDoListCell from './table/ToDoListCell.vue';
 const todoListHandler = ListRequest('todolist', { module: 'todo' })
+provide("listHandler",todoListHandler)
 
 const state = reactive({
   loadingEntry: false,
-  filter: {}
+  filter: {},
+  visibleBones:["creationdate","firstname", "lastname","status","reason","subject", "message"]
 })
+provide("listState", state)
 
 function reload() {
   todoListHandler.fetchAll()
 }
-
-function updateStatus(event, skel) {
-  state.loadingEntry = true
-  Request.edit('todo', skel['key'], {
-    dataObj: {
-      status: event.target.value
-    }
-  })
-    .then((resp) => {
-      state.loadingEntry = false
-      reload()
-    })
-    .catch((error) => {
-      state.loadingEntry = false
-      reload()
-    })
-}
+provide("listReload", reload)
 
 function updatefilter(event) {
   console.log(event)
@@ -121,14 +106,31 @@ onMounted(() => {
 })
 </script>
 <style scoped>
-.wrapper{
+.wrapper-list{
   display:flex;
   flex-direction: column;
   gap:10px;
 }
+
+h1.headline{
+  font-size:var(--sl-font-size-2x-large);
+}
+
+sl-card{
+  position:relative;
+  height:100%;
+  min-height:200px;
+
+  &::part(base){
+    height:100%;
+  }
+}
+sl-select::part(combobox){
+  border-top-right-radius:0;
+  border-bottom-right-radius:0;
+}
 table {
   width: 100%;
-  table-layout: fixed;
 
   & tbody {
     & tr {
@@ -159,13 +161,25 @@ table {
       padding: 0.4em 2.4em 0.4em 0.6em;
       overflow: hidden;
       font-weight: 700;
+      font-size: var(--sl-font-size-large);
       border-right: 1px solid var(--sl-color-neutral-300);
       text-overflow: ellipsis;
+      border-bottom: 1px solid var(--sl-color-neutral-300);
+      padding-bottom: 20px;
+      text-align: center;
 
       &:last-child {
         border-right: 0;
       }
     }
+  }
+
+  & tr.closed{
+    text-decoration: line-through;
+    color: var(--sl-color-neutral-400);
+  }
+  & tr.pending > *{
+    font-weight: 700;
   }
 }
 </style>
