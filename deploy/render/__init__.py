@@ -17,11 +17,18 @@ json._postProcessAppObj = gen_postProcessAppObj(json)
 
 import typing as t
 import json as _json
-import logging
+import logging, requests
 from viur.core.render.html.utils import jinjaGlobalFunction
 @jinjaGlobalFunction
-def inject_vite(render, development: bool = False) -> t.Any:
+def inject_vite(render, development: bool | None = None) -> t.Any:
     """build vue imports from manifest"""
+
+    if development is None:
+        try:
+            resp = requests.get("http://localhost:8081")
+            development = resp.status_code == 200
+        except Exception as e:
+           development = False
 
     if development:
         return """<script type="module" src="http://localhost:8081/@vite/client"></script>
