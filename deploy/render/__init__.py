@@ -20,19 +20,19 @@ import json as _json
 import logging, requests
 from viur.core.render.html.utils import jinjaGlobalFunction
 @jinjaGlobalFunction
-def inject_vite(render, development: bool | None = None) -> t.Any:
+def inject_vite(render, development: bool | None = None, development_server: str = "http://localhost:8081") -> t.Any:
     """build vue imports from manifest"""
 
     if development is None:
         try:
-            resp = requests.get("http://localhost:8081")
+            resp = requests.get(development_server)
             development = resp.status_code == 200
         except Exception as e:
            development = False
 
     if development:
-        return """<script type="module" src="http://localhost:8081/@vite/client"></script>
-                  <script type="module" src="http://localhost:8081/main.js"></script>"""
+        return f"""<script type="module" src="{development_server}/@vite/client"></script>
+                  <script type="module" src="{development_server}/main.js"></script>"""
 
     vite_path = "/static/site"
 
