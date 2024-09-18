@@ -16,8 +16,8 @@
       </slot>
     </div>
 
-    <slot boneName="reason"
-          :widget="getBoneWidget(formState.structure['reason']['type'])"
+    <slot boneName="category"
+          :widget="getBoneWidget(formState.structure['category']['type'])"
           label="top"
     >
     </slot>

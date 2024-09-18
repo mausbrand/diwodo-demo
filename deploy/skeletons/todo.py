@@ -21,14 +21,19 @@ class TodoSkel(skeleton.Skeleton):
         required=True,
     )
 
-    reason = SelectBone(descr="Thema", values={
-        "billing":"Abrechnung",
-        "question":"Anfrage",
-        "service":"Service"
-    },defaultValue="question")
+    category = SelectBone(
+        descr="Kategorie",
+        defaultValue="question",
+        required=True,
+        values={
+            "question": "Anfrage",
+            "billing": "Abrechnung",
+            "service": "Service",
+        },
+    )
 
     subject = StringBone(
-        descr="Anliegen",
+        descr="Thema",
         required=True,
     )
 
@@ -47,7 +52,7 @@ class TodoSkel(skeleton.Skeleton):
             "open": "Offen",
             "pending": "In Bearbeitung",
             "closed": "Geschlossen",
-        }
+        },
     )
 
     user = UserBone(

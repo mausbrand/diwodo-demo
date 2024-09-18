@@ -17,7 +17,7 @@
       </sl-select>
     </template>
 
-    <template v-else-if="boneName === 'reason'">
+    <template v-else-if="boneName === 'category'">
       {{ listHandler.structure[boneName]['values'][skel[boneName]] }}
     </template>
 

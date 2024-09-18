@@ -24,8 +24,6 @@ class Index(Module):
         template = self.render.getEnv().get_template("index.html")
         return template.render()
 
-        #return conf.main_app.todo.add()
-
     @exposed
     def scriptor(self):
         raise errors.Redirect("/scriptor/index.html")

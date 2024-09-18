@@ -81,7 +81,7 @@ provide("listHandler",todoListHandler)
 const state = reactive({
   loadingEntry: false,
   filter: {},
-  visibleBones:["creationdate","firstname", "lastname","status","reason","subject", "message"]
+  visibleBones:["creationdate","firstname", "lastname","status","category","subject", "message"]
 })
 provide("listState", state)
 
