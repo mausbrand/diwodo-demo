@@ -12,7 +12,22 @@ class Todo(List):
             "lastname",
             "firstname",
             "subject",
-        )
+        ),
+        "actions":["assign"],
+        "customActions":{
+            "assign": {
+                    "name": "Zuweisen",  # button name
+                    "access": ["todo-edit", "root"],  # wer darf triggern
+                    "icon": "person-plus-fill", # button icon
+                    "variant":"success", # button color
+                    "outline":True, # button outline style
+                    "action": "action",
+                    "url": "/todo/assign",  # actionSkel initial url
+                    "enabled": 'True',  # regel wann button aktiv "TRUE" === immer
+                    "show_label":True, # button ohne label
+                    "target":"popup" # popup, tab
+                },
+        }
     }
 
     default_order = {
@@ -58,6 +73,11 @@ class Todo(List):
             return self.render.edit(action_skel, "assign")
 
         # TODO: Add program logic here
+        for todo in action_skel["todo"]:
+            skel = self.editSkel()
+            skel.fromDB(todo["dest"]["key"])
+            skel.setBoneValue("user", action_skel["user"]["dest"]["key"])
+            skel.toDB()
 
         # TODO: Provide generic render action success
         return self.render.editSuccess(action_skel, "assignSuccess")
