@@ -11,8 +11,6 @@
           ref="addform"
           module="todo"
           action="add"
-          :useCategories="false"
-          :layout="TodoAddFormLayout"
       >
       </vi-form>
     </div>
@@ -29,11 +27,8 @@
 </template>
 <script setup>
 /*
-
-
 :useCategories="false"
-
-
+:layout="TodoAddFormLayout"
 */
 import {ref, reactive, computed} from 'vue'
 import loader from '@viur/vue-utils/generic/Loader.vue'

@@ -3,6 +3,11 @@ from viur.core.bones import *
 
 
 class TodoSkel(skeleton.Skeleton):
+    subSkels = {
+        "*": ("*name", ),
+        "add": ["subject"],
+    }
+
     creationdate = DateBone(
         descr="Erstellt am",
         readOnly=True,
@@ -11,7 +16,6 @@ class TodoSkel(skeleton.Skeleton):
         compute=Compute(fn=utils.utcNow, interval=ComputeInterval(ComputeMethod.Once)),
     )
 
-
     firstname = StringBone(
         descr="Vorname",
     )
@@ -19,6 +23,11 @@ class TodoSkel(skeleton.Skeleton):
     lastname = StringBone(
         descr="Nachname",
         required=True,
+    )
+
+    phone = PhoneBone(
+        descr="Telefon",
+        default_country_code="+49",
     )
 
     category = SelectBone(
@@ -42,7 +51,6 @@ class TodoSkel(skeleton.Skeleton):
         required=True,
         validHtml=None,
     )
-
 
     status = SelectBone(
         descr="Status",

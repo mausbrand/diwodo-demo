@@ -13,20 +13,20 @@ class Todo(List):
             "firstname",
             "subject",
         ),
-        "actions":["assign"],
-        "customActions":{
+        "actions": ["assign"],
+        "customActions": {
             "assign": {
-                    "name": "Zuweisen",  # button name
-                    "access": ["todo-edit", "root"],  # wer darf triggern
-                    "icon": "person-plus-fill", # button icon
-                    "variant":"success", # button color
-                    "outline":True, # button outline style
-                    "action": "action",
-                    "url": "/todo/assign",  # actionSkel initial url
-                    "enabled": 'True',  # regel wann button aktiv "TRUE" === immer
-                    "show_label":True, # button ohne label
-                    "target":"popup" # popup, tab
-                },
+                "name": "Zuweisen",  # button name
+                "access": ["todo-edit", "root"],  # Who may trigger?
+                "icon": "person-plus-fill",  # button icon
+                "variant": "success",  # button color
+                "outline": True,  # button outline style
+                "action": "action",  # ActionSkel
+                "url": "/{{module}}/assign",  # actionSkel initial url
+                "enabled": 'True',  # regel wann button aktiv "TRUE" === immer
+                "show_label": True,  # button ohne label
+                "target": "popup",  # popup, tab
+            },
         }
     }
 
@@ -42,14 +42,19 @@ class Todo(List):
         return True  # everyone can add entries!
 
     def addSkel(self):
-        # TODO: new skel.sub_skel() feature!
+        # skel = self._resolveSkelCls().subskel(("subject", "message", "*stname"))
+        # skel = self._resolveSkelCls().subskel("add")
+        # skel = self._resolveSkelCls().subskel(("message", ), "add")
+        # return skel
+
         skel = super().addSkel().clone()
-        #skel.status = None
+        skel.status = None
+        skel.user = None
         return skel
 
     @exposed
     @skey(allow_empty=True)
-    @access("root", "todo-edit")
+    @access("todo-edit")
     def assign(self, **kwargs):
 
         # ActionSkel for assigning multiple todos to one user
@@ -59,6 +64,11 @@ class Todo(List):
                 descr="Todos",
                 multiple=True,
                 required=True,
+                format="$(dest.lastname) - $(dest.subject)",
+                refKeys={
+                    "lastname",
+                    "subject",
+                }
             )
 
             user = UserBone(
@@ -73,6 +83,7 @@ class Todo(List):
             return self.render.edit(action_skel, "assign")
 
         # TODO: Add program logic here
+        # TODO: Create skel.update() function for transactional in-place update
         for todo in action_skel["todo"]:
             skel = self.editSkel()
             skel.fromDB(todo["dest"]["key"])
