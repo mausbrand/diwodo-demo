@@ -11,6 +11,7 @@ class Todo(List):
             "creationdate",
             "lastname",
             "firstname",
+            "user",
             "subject",
         ),
         "actions": ["assign"],
