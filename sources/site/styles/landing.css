@@ -4,6 +4,9 @@
   align-items: center;
   height: 100%;
   background-image: url("@@/images/login-background.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
   background-blend-mode:color-dodge;
   background-color: var(--sl-color-neutral-300);
 
@@ -11,6 +14,7 @@
   & h1{
     font-size: var(--sl-font-size-2x-large);
     color:black;
+
   }
 
   & .wrapper-entrypoint{
@@ -19,6 +23,8 @@
     justify-content: center;
     gap:80px;
   }
+
+
 }
 
 sl-card.entrypoint{
@@ -63,4 +69,17 @@ sl-card.entrypoint{
   }
 
 
+
+}
+
+@media (max-width: 768px) {
+  h1{
+    text-align: center;
+  }
+}
+
+@media (max-width: 390px) {
+  sl-card.entrypoint{
+    max-width: 80%;
+  }
 }
