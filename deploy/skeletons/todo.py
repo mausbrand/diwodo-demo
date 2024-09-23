@@ -8,6 +8,7 @@ class TodoSkel(skeleton.Skeleton):
         "add": ["subject"],
     }
 
+    # FIXME: viur-core
     creationdate = DateBone(
         descr="Erstellt am",
         readOnly=True,
@@ -25,25 +26,24 @@ class TodoSkel(skeleton.Skeleton):
         required=True,
     )
 
-    phone = PhoneBone(
-        descr="Telefon",
-        default_country_code="+49",
-    )
-
     category = SelectBone(
-        descr="Kategorie",
+        descr="Thema",
         defaultValue="question",
         required=True,
         values={
-            "question": "Anfrage",
+            "question": "Frage",
             "billing": "Abrechnung",
             "service": "Service",
         },
     )
 
-    subject = StringBone(
-        descr="Thema",
-        required=True,
+    # LIVE (1)
+    phone = PhoneBone(
+        descr="Telefon",
+        default_country_code="+49",
+        params={
+            "visibleIf": """ category == "service" """  # LIVE(2)
+        }
     )
 
     message = TextBone(
@@ -57,7 +57,8 @@ class TodoSkel(skeleton.Skeleton):
         required=True,
         defaultValue="open",
         values={
-            "open": "Offen",
+            "new": "Neu",
+            "open": "Zugewiesen",
             "pending": "In Bearbeitung",
             "closed": "Geschlossen",
         },

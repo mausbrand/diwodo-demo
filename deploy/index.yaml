@@ -26,6 +26,18 @@ indexes:
   - direction: desc
     name: creationdate
 
+- kind: todo
+  properties:
+  - name: category
+  - name: creationdate
+    direction: desc
+
+- kind: todo
+  properties:
+  - name: user.dest.__key__
+  - name: creationdate
+    direction: desc
+
 - kind: viur-emails
   properties:
   - name: isSend

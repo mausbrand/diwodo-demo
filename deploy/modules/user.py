@@ -17,3 +17,6 @@ class User(User):
             "orderby": "lastname",
         },
     }
+
+
+User.json = True
