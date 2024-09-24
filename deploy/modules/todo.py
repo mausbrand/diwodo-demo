@@ -65,6 +65,16 @@ class Todo(List):
         skel.user = None
         return skel
 
+    def listFilter(self, query):
+        if query := super().listFilter(query):
+            if not utils.string.is_prefix(self.render.kind, "json.vi"):
+                cuser = current.user.get()
+                query.mergeExternalFilter({
+                    "user.dest.key": cuser["key"],
+                })
+
+        return query
+
     @exposed
     @skey(allow_empty=True)
     @access("todo-edit")
@@ -108,16 +118,6 @@ class Todo(List):
             )
 
         return self.render.render("assignSuccess", action_skel)
-
-    def listFilter(self, query):
-        if query := super().listFilter(query):
-            if not utils.string.is_prefix(self.render.kind, "json.vi"):
-                cuser = current.user.get()
-                query.mergeExternalFilter({
-                    "user.dest.key": cuser["key"],
-                })
-
-        return query
 
 
 Todo.html = True
