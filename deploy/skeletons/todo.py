@@ -55,7 +55,7 @@ class TodoSkel(skeleton.Skeleton):
     status = SelectBone(
         descr="Status",
         required=True,
-        defaultValue="open",
+        defaultValue="new",
         values={
             "new": "Neu",
             "open": "Zugewiesen",

@@ -96,20 +96,18 @@ class Todo(List):
                 action_skel.setBoneValue("todo", key, append=True)
 
         if not kwargs or not action_skel.fromClient(kwargs):
-            # TODO: Provide generic render action skel
-            return self.render.edit(action_skel, "assign")
+            return self.render.render("assign", action_skel)
 
-        # TODO: Add program logic here
-        # TODO: Create skel.update() function for transactional in-place update
         for todo in action_skel["todo"]:
-            skel = self.editSkel()
-            skel.fromDB(todo["dest"]["key"])
-            skel["status"] = "open"
-            skel.setBoneValue("user", action_skel["user"]["dest"]["key"])
-            skel.toDB()
+            self.editSkel().update(
+                values={
+                    "status": "open",
+                    "user": action_skel["user"]["dest"]["key"],
+                },
+                key=todo["dest"]["key"],
+            )
 
-        # TODO: Provide generic render action success
-        return self.render.editSuccess(action_skel, "assignSuccess")
+        return self.render.render("assignSuccess", action_skel)
 
     def listFilter(self, query):
         if query := super().listFilter(query):
