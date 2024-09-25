@@ -2,46 +2,26 @@
 
 {% block content %}
 
-    <div class="wrapper-center">
-        <div class="content">
+    <div class="wrapper">
 
-            <h1>Hausverwaltung</h1>
-            <div class="wrapper-entrypoint">
-                <sl-card class="entrypoint" id="form">
-                    <a href="/todo/add" target="_blank">
-                        <div class="wrapper-card">
-                            <sl-icon name="plus-square-fill" ></sl-icon>
-                            <span>Zum Serviceformular</span>
-                        </div>
-                    </a>
-                </sl-card>
-                {% if currentUser and (
-                    "indoor" in currentUser["roles"] or
-                    "admin" in currentUser["roles"]
-                ) %}
-                    <sl-card class="entrypoint" id="admin">
-                        <a href="/vi" target="_blank">
-                            <div class="wrapper-card">
-                                <sl-icon name="person-fill-gear" ></sl-icon>
-                                <span>Administration der Hausverwaltung</span>
-                            </div>
-                        </a>
-                    </sl-card>
-                {% endif %}
-                {% if currentUser and (
-                    "field" in  currentUser["roles"] or
-                    "admin" in currentUser["roles"]
-                ) %}
-                    <sl-card class="entrypoint"  id="app">
-                        <a href="/app/index.html" target="_blank">
-                            <div class="wrapper-card">
-                                <sl-icon name="list-task" ></sl-icon>
-                                <span>Servicetechniker:innen App</span>
-                            </div>
-                        </a>
-                    </sl-card>
-                {% endif %}
+        <div class="stage">
+            <picture>
+                <img src="/static/site/images/stage.jpg">
+            </picture>
+            <div class="bind">
+                <h1 class="headline">
+                    Wir vermitteln Zuhause
+                </h1>
             </div>
+        </div>
+
+        <div class="bind">
+            <p class="paragraph">
+                Wir sind Ihr zuverlässiger Partner für die Verwaltung von Immobilien. Ob Eigentumswohnung, Mehrfamilienhaus oder Gewerbeimmobilie – wir kümmern uns um Ihre Immobilie, als wäre es unsere eigene. Mit langjähriger Erfahrung, einem engagierten Team und modernster Technik bieten wir maßgeschneiderte Lösungen, die den Werterhalt und die Rentabilität Ihrer Immobilien sichern.
+            </p>
+            <p class="paragraph">
+            Seit 10 Jahren sind wir als Hausverwaltung tätig. Unser Ziel ist es, Immobilienbesitzern die Sorgen und den Aufwand rund um die Verwaltung abzunehmen. Wir verstehen uns als Schnittstelle zwischen Eigentümern, Mietern und Dienstleistern. Unser erfahrenes Team bietet individuelle Betreuung, transparente Abrechnungen und schnelle Reaktionszeiten, damit Sie sich entspannt zurücklehnen können.
+            </p>
         </div>
 
     </div>

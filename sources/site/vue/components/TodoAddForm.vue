@@ -18,7 +18,7 @@
     <sl-bar>
       <div slot="right">
         <sl-button variant="success" @click="sendForm" :loading="state.sending">
-          <sl-icon name="floppy2" slot="prefix"></sl-icon>
+          <sl-icon name="send" slot="prefix"></sl-icon>
           Senden
         </sl-button>
       </div>

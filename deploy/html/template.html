@@ -5,16 +5,53 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="icon" href="/static/site/images/logo.svg">
+
         {%- block additionalhead %}
 
         {% endblock %}
         {{inject_vite()}}
       </head>
     <body>
+
+        <header class="header">
+            <div class="bind">
+                <a href="/" class="logo">
+                    <img src="/static/site/images/logo.svg">
+                </a>
+                <div class="menu">
+                    <a href="#" class="menu-item">
+                        Über Uns
+                    </a>
+                    <a href="#" class="menu-item">
+                        Unsere Immobilien
+                    </a>
+                    <a href="/todo/add" class="menu-item">
+                        <sl-button variant="primary">
+                            Kontakt
+                        </sl-button>
+                    </a>
+                </div>
+            </div>
+        </header>
+
         <div id="vite_context">
             {%- block content %}
 
             {% endblock %}
         </div>
+
+        <footer class="footer">
+            <span>© 2024 | Hausverwaltung</span>
+            <div class="footer-links">
+                <a href="#">
+                    Impressum
+                </a>
+                <a href="#">
+                    Datenschutz
+                </a>
+            </div>
+        </footer>
     </body>
 </html>

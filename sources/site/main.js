@@ -1,4 +1,4 @@
-import '@viur/ignite/ignite.css' // load ignite defaults
+//import '@viur/ignite/ignite.css' // load ignite defaults
 import './shoelaceConfig.js' // import a selection of components
 import './styles/style.css' // load app style
 
@@ -46,4 +46,3 @@ app.mount('#vite_context')
 
 
 import './scripts/main.js' // load non vue scripts
-

@@ -1,17 +1,13 @@
-@import url(landing.css);
-:root {
-  height: 100%;
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  hyphens: auto;
-  font-size: var(--ignt-font-size-medium);
-}
+@charset "UTF-8";
+@import url('@viur/ignite/ignite.css');
 
 body {
   height: 100%;
   width: 100%;
   -webkit-font-smoothing:antialiased;
+  hyphens: auto;
+  font-size: 16px;
+  background-color: #fff;
 }
 
 #vite_context {
@@ -19,12 +15,117 @@ body {
   height: 100%;
 }
 
-h1{
-  font-weight: bold;
-  font-size: var(--sl-font-size-x-large);
-  padding:var(--sl-spacing-medium) 0;
+.wrapper{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-:not(:defined) {
-  visibility: hidden;
+.bind{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1500px;
+  padding: 20px;
+  margin: 20px auto;
+}
+
+.header{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #fff;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, .25);
+  height: 100px;
+  width: 100%;
+
+  .bind{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.logo{
+  height: 60px;
+  width: 60px;
+}
+
+.menu{
+  margin-left: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 20px;
+}
+
+.stage{
+  width: 100%;
+  height: calc(100vh - 200px);
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  padding: 10px 0;
+  position: relative;
+
+  picture{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+
+    img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .headline{
+    padding: 0 20px;
+    color: #fff;
+    font-size: 3em;
+    background-color: #970000;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .bind{
+    align-items: start;
+  }
+}
+
+.paragraph{
+  max-width: 70%;
+}
+
+.footer{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #970000;
+  color: #fff;
+}
+
+.footer-links{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 10px;
+
+  a{
+    color: #fff;
+    text-decoration: underline;
+  }
+}
+
+.headline{
+  color: #970000;
+  font-size: 2em;
+  font-weight: 600;
 }
