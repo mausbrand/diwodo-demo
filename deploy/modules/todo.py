@@ -15,17 +15,16 @@ class Todo(List):
             "message",
             "user",
         ),
-        # LIVE (3)
         "views": [
             {
-                "icon": "chat-dots-fill",  # LIVE (4)
                 "name": "Service - Neu",
+                "icon": "chat-dots-fill",
                 "filter": {
                     "category": "service",
                     "status": "new",
                 },
                 "actions": ["assign"],
-                "customActions": {  # LIVE(5)
+                "customActions": {
                     "assign": {
                         "name": "Zuweisen",  # button name
                         "access": ["todo-edit", "root"],  # Who may trigger?
@@ -40,7 +39,7 @@ class Todo(List):
                     },
                 },
             }
-        ]
+        ],
     }
 
     default_order = {
