@@ -31,7 +31,7 @@
     "@viur/ckeditor5-build-classic": "^1.0.3-v38.0.1",
     "@viur/ignite": "^5.1.2",
     "@viur/shoelace": "^1.0.8-v2.16.0",
-    "@viur/vue-utils": "^1.7.10",
+    "@viur/vue-utils": "^1.7.11",
     "pinia": "^2.2.2",
     "vue": "^3.5.4"
   }
