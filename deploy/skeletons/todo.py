@@ -38,7 +38,11 @@ class TodoSkel(skeleton.Skeleton):
     )
 
     phone = PhoneBone(
-        default_
+        default_country_code="+49",
+        descr="Telefon",
+        params={
+            "readonlyIf": """ category == "service" """
+        }
     )
 
     message = TextBone(
