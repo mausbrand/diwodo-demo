@@ -17,12 +17,11 @@ class TodoSkel(skeleton.Skeleton):
         descr="Gebäude",
         required=True,
         values=(
-            "Kanalhafen 23",
-            "Kohlenhafen 13",
-            "Petroleumhafen 42",
-            "Stadthafen 1a",
-            "Stadthafen 1b",
-            "Südhafen 9",
+            "Kanalhafen",
+            "Kohlenhafen",
+            "Petroleumhafen",
+            "Stadthafen",
+            "Südhafen",
         )
     )
 
@@ -35,14 +34,6 @@ class TodoSkel(skeleton.Skeleton):
             "billing": "Abrechnung",
             "service": "Service",
         },
-    )
-
-    phone = PhoneBone(
-        default_country_code="+49",
-        descr="Telefon",
-        params={
-            "readonlyIf": """ category == "service" """
-        }
     )
 
     message = TextBone(
