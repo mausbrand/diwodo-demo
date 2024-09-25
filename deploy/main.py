@@ -21,7 +21,7 @@
 #
 # ------------------------------------------------------------------------------
 
-from viur.core import conf, db, email, securityheaders, secret, current, errors, setup
+from viur.core import conf, db, email, securityheaders, secret, current, errors, setup, setDefaultLanguage
 from viur.core.config import ConfigType
 
 
@@ -128,21 +128,13 @@ conf.user.roles = {
 # Admin specific configurations
 #
 
-conf.admin.name = \
-    conf.project.appnames.get(conf.instance.project_id, conf.instance.project_id) \
-    + " v" + conf.project.version
+conf.admin.name = "DiWoDo 2024 - Hausverwaltung"
 
-# conf.admin.logo = "/static/images/logo.svg"
-# conf.admin.login_logo = "/static/images/logo.svg"
-# conf.admin.login_background = "login-backgound-2.jpg"
-# conf.admin.color_primary = "#2e7291"
-# conf.admin.color_secondary = "#15a995"
-# conf.admin.module_groups = {
-#     "system": {
-#         "name": "System",
-#         "icon": "gear",
-#     },
-# }
+conf.admin.logo = "/static/site/images/logo.svg"
+conf.admin.login_logo = "/static/site/images/logo.svg"
+conf.admin.login_background = "/static/site/images/stage.jpg"
+conf.admin.color_primary = "#970000"
+conf.admin.color_secondary = "#000000"
 
 # ------------------------------------------------------------------------------
 # Email configuration
@@ -241,5 +233,5 @@ if conf.instance.is_dev_server:
 import modules  # noqa
 import render  # noqa
 
-# core.setDefaultLanguage("de")
+setDefaultLanguage("de")
 app = setup(modules, render)

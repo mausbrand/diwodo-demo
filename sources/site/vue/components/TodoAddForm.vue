@@ -11,6 +11,7 @@
           ref="addform"
           module="todo"
           action="add"
+          :useCategories="false"
       >
       </vi-form>
     </div>
