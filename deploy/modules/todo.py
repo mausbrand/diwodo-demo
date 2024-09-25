@@ -18,7 +18,7 @@ class Todo(List):
         "views": [
             {
                 "name": "Service - Neu",
-                "icon": "chat-dots-fill",
+                "icon": "hammer",
                 "filter": {
                     "category": "service",
                     "status": "new",
@@ -26,16 +26,16 @@ class Todo(List):
                 "actions": ["assign"],
                 "customActions": {
                     "assign": {
-                        "name": "Zuweisen",  # button name
-                        "access": ["todo-edit", "root"],  # Who may trigger?
-                        "icon": "person-plus-fill",  # button icon
-                        "variant": "success",  # button color
-                        "outline": True,  # button outline style
-                        "action": "action",  # ActionSkel
-                        "url": "/{{module}}/assign",  # actionSkel initial url
-                        "enabled": 'True',  # regel wann button aktiv "TRUE" === immer
-                        "show_label": True,  # button ohne label
-                        "target": "popup",  # popup, tab
+                        "name": "Zuweisen",
+                        "access": ["todo-edit", "root"],
+                        "icon": "person-plus-fill",
+                        "variant": "success",
+                        "outline": True,
+                        "action": "action",
+                        "url": "/{{module}}/assign",
+                        "enabled": "True",
+                        "show_label": True,
+                        "target": "popup",
                     },
                 },
             }
@@ -45,6 +45,11 @@ class Todo(List):
     default_order = {
         "orderby": "creationdate",
         "orderdir": "desc",
+    }
+
+    roles = {
+        "field": ["edit", "view"],
+        "indoor": ["*"],
     }
 
     addTemplate = "todo_add"
@@ -89,7 +94,7 @@ class Todo(List):
                 format="$(dest.lastname) - $(dest.message)",
                 refKeys={
                     "lastname",
-                    "subject",
+                    "message",
                 }
             )
 
@@ -101,6 +106,9 @@ class Todo(List):
         action_skel = TodoAssignSkel()
 
         if selected_keys := current.request.get().context.get("viur_selected_keys"):
+            if isinstance(selected_keys, str):
+                selected_keys = selected_keys,
+
             for key in selected_keys:
                 action_skel.setBoneValue("todo", key, append=True)
 

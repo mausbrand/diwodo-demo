@@ -18,5 +18,15 @@ class User(User):
         },
     }
 
+    roles = {
+        "indoor": ["view"],
+    }
+
+    def get_role_defaults(self, role: str) -> set[str]:
+        if role in ("indoor", "admin"):
+            return {"admin"}
+
+        return set()
+
 
 User.json = True
