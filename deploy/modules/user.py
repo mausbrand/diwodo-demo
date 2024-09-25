@@ -24,7 +24,7 @@ class User(User):
     }
 
     def get_role_defaults(self, role: str) -> set[str]:
-        if role in ("indoor", "admin"):
+        if role in ("field", "indoor", "admin"):
             return {"admin"}
 
         return set()

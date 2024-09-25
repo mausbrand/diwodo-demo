@@ -21,7 +21,7 @@
 #
 # ------------------------------------------------------------------------------
 
-from viur.core import conf, db, email, securityheaders, secret, current, errors, setup, setDefaultLanguage
+from viur.core import conf, securityheaders, current, setup, setDefaultLanguage
 from viur.core.config import ConfigType
 
 
