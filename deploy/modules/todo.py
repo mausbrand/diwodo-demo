@@ -59,11 +59,6 @@ class Todo(List):
         return True  # everyone can add entries!
 
     def addSkel(self):
-        # skel = self._resolveSkelCls().subskel(("subject", "message", "*stname"))
-        # skel = self._resolveSkelCls().subskel("add")
-        # skel = self._resolveSkelCls().subskel(("message", ), "add")
-        # return skel
-
         skel = super().addSkel().clone()
         skel.status = None
         skel.user = None

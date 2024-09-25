@@ -16,10 +16,6 @@ class Index(Module):
         if len(args) > 1 or kwargs:
             raise errors.NotFound()
 
-        # This manually routes a call to "/sitemap.xml"
-        if len(args) == 1 and args[0] == "sitemap.xml":
-            return self.sitemap_xml()
-
         # Else, render index.html
         template = self.render.getEnv().get_template("index.html")
         return template.render()

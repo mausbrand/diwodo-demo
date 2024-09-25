@@ -3,6 +3,9 @@ from viur.core.modules.file import File
 
 
 class File(File):
+    adminInfo = File.adminInfo | {
+        "name": "Dateien"
+    }
 
     def getAvailableRootNodes(self, *args, **kwargs):
         # Any user who is logged in can see the root-node.

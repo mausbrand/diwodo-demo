@@ -128,13 +128,12 @@ conf.user.roles = {
 # Admin specific configurations
 #
 
-conf.admin.name = "DiWoDo 2024 - Hausverwaltung"
+conf.admin.name = "Administration"
 
-conf.admin.logo = "/static/site/images/logo.svg"
 conf.admin.login_logo = "/static/site/images/logo.svg"
 conf.admin.login_background = "/static/site/images/stage.jpg"
 conf.admin.color_primary = "#970000"
-conf.admin.color_secondary = "#000000"
+conf.admin.color_secondary = "#ffffff"
 
 # ------------------------------------------------------------------------------
 # Email configuration

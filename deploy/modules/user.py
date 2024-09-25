@@ -8,6 +8,7 @@ class User(User):
 
     # Extend default adminInfo to custom adminInfo
     adminInfo = User.adminInfo | {
+        "name": "Benutzer",
         "columns": [
             "name",
             "firstname",
