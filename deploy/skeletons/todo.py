@@ -36,6 +36,14 @@ class TodoSkel(skeleton.Skeleton):
         },
     )
 
+    phone = PhoneBone(
+        descr="Telefon",
+        default_country_code="+49",
+        params={
+            "visibleIf": """ category == "service" """,
+        },
+    )
+
     message = TextBone(
         descr="Nachricht",
         required=True,
