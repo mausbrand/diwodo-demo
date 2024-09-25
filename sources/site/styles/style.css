@@ -1,5 +1,6 @@
 @charset "UTF-8";
 @import url('@viur/ignite/ignite.css');
+@import url('config.css');
 
 body {
   height: 100%;
@@ -58,6 +59,10 @@ body {
   align-items: center;
   flex-wrap: nowrap;
   gap: 20px;
+}
+
+.menu-item{
+  font-weight: 600;
 }
 
 .stage{
@@ -128,4 +133,42 @@ body {
   color: #970000;
   font-size: 2em;
   font-weight: 600;
+}
+
+h1.headline{
+  font-size: 2.6em;
+}
+
+h2.headline{
+  font-size: 2.2em;
+}
+
+h3.headline{
+  font-size: 1.6em;
+  color: var(--ignt-color-text-default);
+}
+
+h4.headline{
+  font-size: 1.5em;
+}
+
+h5.headline{
+  font-size: 1.2em;
+}
+
+.immobilie-wrap{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-gap: 30px;
+}
+
+.immobilie{
+  &::part(image){
+    aspect-ratio: 1;
+
+  }
+
+  img{
+    object-fit: cover;
+  }
 }

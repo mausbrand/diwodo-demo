@@ -1,0 +1,79 @@
+
+:root,
+:host {
+  --ignt-theme-name: "Hausverwaltung";
+
+  /* Color Set */
+  --ignt-color-primary: #970000;
+  --ignt-color-grey: #EBEBEB;
+  --ignt-color-border-default: var(--ignt-color-gray-300);
+  --ignt-color-border-light: var(--ignt-color-gray-200);
+  --ignt-color-text-default: #353535;
+  --ignt-color-text-light: #91989c;
+
+  --ignt-basic-color-hover: #670101;
+
+  --sl-input-filled-background-color: var(--ignt-color-grey);
+  --sl-input-filled-background-color-focus: var(--ignt-color-grey);
+
+  --ignt-surface-light: color-mix(in srgb, var(--ignt-color-neutral-0), var(--ignt-mix-color-up) 3%);
+  --ignt-surface-dark: color-mix(in srgb, var(--ignt-color-neutral-0), var(--ignt-mix-color-up) 7%);
+
+  --ignt-color-hover-default: #f7f7f7;
+
+  /* Alert colors */
+  --ignt-color-success: #419839;
+  --ignt-color-warning: #ff8c00;
+  --ignt-color-danger: color-mix(in oklch, var(--ignt-color-primary), darkred 80%);
+  --ignt-color-info: #4785a7;
+
+  /* Buttons, Inputs, Forms and Menus */
+  --ignt-color-form-default: var(--ignt-color-neutral-0);
+
+  /* Font sizes */
+  --ignt-font-size-3x-small: .8rem;
+  --ignt-font-size-2x-small: .85rem;
+  --ignt-font-size-x-small: .9rem;
+  --ignt-font-size-small: .95rem;
+  --ignt-font-size-medium: 1rem;
+  --ignt-font-size-large: 1rem;
+  --ignt-font-size-x-large: 1rem;
+  --ignt-font-size-2x-large: 1.2rem;
+  --ignt-font-size-3x-large: 1.3rem;
+  --ignt-font-size-4x-large: 1.4rem;
+
+  --ignt-input-height-large: 2.5rem;
+
+  /* Font Weights */
+  --ignt-font-weight-light: 300;
+  --ignt-font-weight-normal: 400;
+  --ignt-font-weight-bold: 700;
+
+  --ignt-page-width-default: 1560px;
+  --ignt-bind-gap: 140px;
+  --ignt-bind-padding: var(--sl-spacing-3x-large);
+  --ignt-bind-padding-mobile: var(--sl-spacing-large);
+  --ignt-inner-page-width: calc(var(--ignt-page-width-default) - (2 * var(--ignt-bind-padding)));
+
+  --ignt-border-radius-default: 8px;
+
+  --ignt-menu-height: 130px;
+
+  /* Media queries / Supported screen sizes */
+  --ignt-break-2x-small: 32em; /* old smart phones or gadgets like smart watches up to: 512px / 16px = 32em */
+  --ignt-break-x-small: 54em; /* smart phones up to: 640px / 16px = 40em */
+  --ignt-break-small: 900px; /* tablets up to: 1040px / 16px = 65em */
+  --ignt-break-medium: 900px; /* screens: 1200px / 16px = 75em */
+  --ignt-break-large: 94em; /* big screens up to: 1504px / 16px = 94em */
+  --ignt-break-x-large: 105em; /* enough space left and right of the main binder: 1680px / 16px = 105em */
+  --ignt-break-2x-large: 114em; /* huge screens: 1824px / 16px = 114em; */
+  --ignt-break-3x-large: 225em; /* 4k screens: 3600px / 16px = 225em; */
+
+  --fluid-height-small: 300px;
+  --fluid-height-medium: 450px;
+  --fluid-height-large: 600px;
+
+  --sl-input-height-small: 2.5em;
+  --sl-input-height-medium: 3em;
+  --sl-input-height-large: 3.75em;
+}
