@@ -1,10 +1,13 @@
 <template>
   <the-login-screen
-    logo="/app/logo.svg"
-    backgroundImage="/app/login-background.jpg"
+    :background-image="appStore.state['admin.login.background']"
+    :logo="appStore.state['admin.login.logo']"
   ></the-login-screen>
 </template>
 
 <script setup>
 import TheLoginScreen from '@viur/vue-utils/login/TheLoginScreen.vue'
+import {useAppStore} from "@/stores/app.js"
+const appStore = useAppStore()
+
 </script>
