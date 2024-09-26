@@ -10,11 +10,11 @@
         <sl-select
           hoist
           @sl-change="updatefilter"
-          :value="null"
+          value="-"
         >
           <sl-option
-            :key="null"
-            :value="null"
+            key="-"
+            value="-"
             >Alle</sl-option
           >
           <sl-option
@@ -32,7 +32,7 @@
     </div>
   </sl-bar>
   <sl-card>
-  <loader v-if="todoListHandler.state.skellist.length===0"></loader>
+  <loader v-if="todoListHandler.state.state<=0"></loader>
   <table v-else>
     <thead>
       <tr>
@@ -50,19 +50,26 @@
       </tr>
     </thead>
     <tbody>
-      <tr
-        v-for="(skel, idx) in todoListHandler.state.skellist"
-        :key="idx"
-        :class="{
-          closed:skel['status']==='closed',
-          pending:skel['status']==='pending',
-        }"
-      >
-        <template v-for="(value, boneName) in skel">
-          <td v-if="state.visibleBones.includes(boneName)">
-            <to-do-list-cell :boneName="boneName" :skel="skel"></to-do-list-cell>
-          </td>
+      <template v-if="todoListHandler.state.skellist.length>0">
+        <tr
+          v-for="(skel, idx) in todoListHandler.state.skellist"
+          :key="idx"
+          :class="{
+            closed:skel['status']==='closed',
+            pending:skel['status']==='pending',
+          }"
+        >
+          <template v-for="(value, boneName) in skel">
+            <td v-if="state.visibleBones.includes(boneName)">
+              <to-do-list-cell :boneName="boneName" :skel="skel"></to-do-list-cell>
+            </td>
+          </template>
+        </tr>
       </template>
+      <tr v-else>
+        <td class="empty" colspan="6">
+          Keine Einträge
+        </td>
       </tr>
     </tbody>
   </table>
@@ -92,7 +99,7 @@ provide("listReload", reload)
 
 function updatefilter(event) {
   console.log(event)
-  if (!event.target.value) {
+  if (event.target.value==='-') {
     state.filter = {}
   } else {
     state.filter = { status: event.target.value }
@@ -147,6 +154,13 @@ table {
         &:last-child {
           border-right: 0;
         }
+      }
+
+      & td.empty{
+        text-align: center;
+        font-weight: 700;
+        color: var(--sl-color-secondary-600);
+        font-style: italic;
       }
 
       &:hover {
