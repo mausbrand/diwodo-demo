@@ -111,13 +111,23 @@ class Todo(List):
             return self.render.render("assign", action_skel)
 
         for todo in action_skel["todo"]:
-            self.editSkel().update(
-                values={
+            skel = self.editSkel()
+            if skel.fromDB(todo["dest"]["key"]):
+                assert skel.fromClient({
                     "status": "open",
                     "user": action_skel["user"]["dest"]["key"],
-                },
-                key=todo["dest"]["key"],
-            )
+                }, amend=True)
+                skel.toDB(update_relations=False)
+
+            # Transactional solution, not implemented in viur-core yet,
+            # see https://github.com/viur-framework/viur-core/pull/1267
+            # self.editSkel().update(
+            #     values={
+            #         "status": "open",
+            #         "user": action_skel["user"]["dest"]["key"],
+            #     },
+            #     key=todo["dest"]["key"],
+            # )
 
         return self.render.render("assignSuccess", action_skel)
 

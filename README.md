@@ -1,29 +1,5 @@
-# diwodo-demo-viur3
+# DiWoDo 2024
 
-Created by Mausbrand.
+Dies ist unser DiWoDo-Demo-Projekt, welches wir auf der [Digitalen Woche Dortmund (DiWoDo)](https://www.diwodo.de/) am 26.09.2024 im Rahmen der Keynote ["Open Source: Generative Plattformentwicklung mit ViUR für die Google App Engine"](https://www.diwodo.de/events/open-source-generative-plattformentwicklung-c5b21ddc-8b68-464c-a6f7-1d79b2ae264a/?sourcePath=%2Fevents%2F%3Fq%3Dviur) im Projektspeicher Dortmund abgehalten haben.
 
-https://diwodo-demo-viur3.appspot.com
-
-
-## Description
-
-This is diwodo-demo-viur3. It is an absolutely nice project doing something, and is written using the ViUR framework.
-
-
-## First time project setup
-
-The following steps are necessary to setup this project appropriately.
-
-1. Create a new Google Cloud project named `diwodo-demo-viur3` at https://console.cloud.google.com/projectcreate
-2. Run `./viur-gcloud-setup.sh diwodo-demo-viur3`
-3. Once, run `pipenv install --dev` to install a local development environment
-
-
-After that, you always can locally fire-up your new ViUR project with `pipenv run viur run`.
-
-To deploy your project, use `pipenv run viur deploy app`, with additional options.
-
-
-## Contact
-
-Contact @Mausbrand for help and support.
+Die Keynote wurde auch im Livestream übertragen und kann [bei YouTube angeschaut](https://www.youtube.com/live/-heq-E3APi4?si=kDYfi0D5Tcxs16Ph&t=15939) werden!

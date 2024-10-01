@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-viur-core = {file = "../viur-core", editable = true}
+viur-core = "==3.7.0.dev4"
 
 [dev-packages]
 viur-cli = "~=2.0"
