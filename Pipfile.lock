@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "3f6deaee62b62e9c3d3e917e47ed941afd4e86bccd9ffcef4a954a7e88654d5a"
+            "sha256": "b1c399bf873b8bcaadbb06167e6c264985a0b9e3d648ba4fe8b12d01f7555de6"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -1141,11 +1141,11 @@
     "develop": {
         "app-server": {
             "hashes": [
-                "sha256:24c757b66bd9a29fd0762aa217dfc38782bd28ec9eeb57661cb1abe41fa57493",
-                "sha256:c580b9211293cc0024129cf4cd59a95319da87e051657a511f70be570294059c"
+                "sha256:c39ece7469481420a2ce5ca8e6fca6fff0fe6966bafa7d3cc6c15fc310c28a4f",
+                "sha256:d41be4efde468be6a2df20ca8c627bab22177b8bfc2cb6a40ced2a68583ae9f9"
             ],
             "markers": "python_version >= '3.8'",
-            "version": "==0.9.11"
+            "version": "==1.0.1"
         },
         "appdirs": {
             "hashes": [
@@ -1561,20 +1561,20 @@
         },
         "viur-cli": {
             "hashes": [
-                "sha256:03226b470438ad9b661e68868a3e15d41980861b13faa226e8448dc5c09bdf28",
-                "sha256:a7e8888bc063579c6e58033b56731e563a3ab31d4dca37141e462e513e8854cb"
+                "sha256:8bb293d0d5957afda1e5d7517546e36edd5ce92de50f8b4c1e0ec22c8d16ee53",
+                "sha256:9baa53bfa87a13a0314386af9ecfb06b190e9c3e7acd0a7744bd969a0f114a08"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.11'",
-            "version": "==2.0.3"
+            "version": "==2.1.0"
         },
         "werkzeug": {
             "hashes": [
-                "sha256:554b257c74bbeb7a0d254160a4f8ffe185243f52a52035060b761ca62d977f03",
-                "sha256:bba1f19f8ec89d4d607a3bd62f1904bd2e609472d93cd85e9d4e178f472c3748"
+                "sha256:54b78bf3716d19a65be4fceccc0d1d7b89e608834989dfae50ea87564639213e",
+                "sha256:60723ce945c19328679790e3282cc758aa4a6040e4bb330f53d30fa546d44746"
             ],
-            "markers": "python_version >= '3.8'",
-            "version": "==2.3.8"
+            "markers": "python_version >= '3.9'",
+            "version": "==3.1.3"
         }
     }
 }

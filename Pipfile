@@ -8,7 +8,7 @@ name = "pypi"
 viur-core = "==3.7.8"
 
 [dev-packages]
-viur-cli = "~=2.0"
+viur-cli = "~=2.1"
 pycodestyle = "~=2.10"
 autopep8 = "~=2.3.0"
 

@@ -1,12 +1,13 @@
 {
-    "cli-version": "2.0.3",
+    "cli-version": "2.1.0",
     "default": {
         "application_name": "diwodo-demo-viur3",
         "builds": {
             "admin": {
+                "clean": "rm -rf deploy/admin",
                 "command": "viur package install admin",
                 "kind": "exec",
-                "version": "4.5.12"
+                "version": "4.8.13"
             },
             "app": {
                 "command": "build",
