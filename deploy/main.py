@@ -82,15 +82,15 @@ conf.valid_application_ids = list(conf.project.appnames.keys())
 # db.config["traceQueries"] = True
 
 # ViUR >= 3.4 compatibility feature disabling
-conf.compatibility.remove("json.bone.structure.keytuples")  # render new dict-style bone-structure
-conf.compatibility.remove("json.bone.structure.camelcasenames")  # render new keys in bone structure only
+# conf.compatibility.remove("json.bone.structure.keytuples")  # render new dict-style bone-structure
+# conf.compatibility.remove("json.bone.structure.camelcasenames")  # render new keys in bone structure only
 
 # ViUR >= 3.5 compatibility feature disabling
-conf.compatibility.remove("json.bone.structure.inlists")  # disable structure rendering on list
+# conf.compatibility.remove("json.bone.structure.inlists")  # disable structure rendering on list
 
 # ViUR >= 3.6 compatibility feature disabling
 # render old-style tuple-list in SelectBone's values structure
-conf.compatibility.remove("bone.select.structure.values.keytuple")
+# conf.compatibility.remove("bone.select.structure.values.keytuple")
 
 # ------------------------------------------------------------------------------
 # User module

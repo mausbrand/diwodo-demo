@@ -1,5 +1,5 @@
 {
-    "cli-version": "2.1.0",
+    "cli-version": "2.2.1",
     "default": {
         "application_name": "diwodo-demo-viur3",
         "builds": {
@@ -7,7 +7,7 @@
                 "clean": "rm -rf deploy/admin",
                 "command": "viur package install admin",
                 "kind": "exec",
-                "version": "4.8.13"
+                "version": "4.8.40"
             },
             "app": {
                 "command": "build",
