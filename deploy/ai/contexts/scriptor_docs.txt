@@ -1,0 +1,2749 @@
+Welcome to scriptor’s documentation!
+************************************
+
+The Scriptor is a client-side scripting environment specifically
+designed for the Viur framework. With this powerful component, you can
+quickly and effectively create scripts to enhance the functionality of
+your Viur-based applications.
+
+Scriptor provides tools that enable you to develop and execute client-
+side scripts seamlessly within the Viur framework. Whether you need to
+implement complex data manipulation, interactive features, or dynamic
+user interaction, the Scriptor empowers you to achieve your goals
+efficiently. It can also be used to implement backend functionality,
+which is especially useful for data validation and manipulation.
+
+Integrating the Scriptor into your Viur-based projects is
+straightforward. Its intuitive syntax and comprehensive documentation
+make it accessible to both seasoned developers and those new to
+client-side scripting. Unlock the full potential of the Viur framework
+by utilizing the Scriptor for your scripting needs.
+
+
+Documentation
+^^^^^^^^^^^^^
+
+* Getting Started
+
+  * Default import from viur.scriptor
+
+* Asynchronicity
+
+  * async and await in Python
+
+    * async Keyword
+
+    * await Keyword
+
+* Dialogs
+
+  * Print
+
+  * Alert
+
+  * Confirm
+
+  * Select
+
+  * Data-input
+
+    * Text
+
+    * Numbers
+
+    * Date
+
+  * Diff
+
+  * Table
+
+* Files
+
+  * Creating Files from Data
+
+    * from_string
+
+    * from_bytes
+
+    * from_table
+
+  * Getting information about the File
+
+    * get_filename
+
+    * get_size
+
+  * Using Data from a File
+
+    * as_bytes
+
+    * as_text
+
+    * as_object_from_json
+
+    * as_list_table and as_dict_table
+
+  * Getting the file to and from your PC
+
+    * download
+
+    * open_dialog
+
+    * save_dialog
+
+* ProgressBar
+
+* Logger
+
+* WebRequest
+
+* DirectoryHandler
+
+  * open
+
+  * list_files and list_subdirs
+
+  * write_to_file
+
+  * open_file_for_writing
+
+  * close_all
+
+  * get_subdirectory_handler
+
+  * read_from_file
+
+* Modules
+
+* Utilities
+
+  * extract_items and map_extract_items
+
+* API Reference
+
+  * "File"
+
+    * "File.from_string()"
+
+    * "File.from_bytes()"
+
+    * "File.from_table()"
+
+    * "File.get_filename()"
+
+    * "File.get_size()"
+
+    * "File.as_bytes()"
+
+    * "File.as_text()"
+
+    * "File.as_object_from_json()"
+
+    * "File.as_list_table()"
+
+    * "File.as_dict_table()"
+
+    * "File.open_dialog()"
+
+    * "File.download()"
+
+  * "WebRequest"
+
+    * "WebRequest.get()"
+
+    * "WebRequest.download()"
+
+    * "WebRequest.post()"
+
+    * "WebRequest.put()"
+
+    * "WebRequest.delete()"
+
+    * "WebRequest.request()"
+
+  * "WebResponse"
+
+    * "WebResponse.get_url()"
+
+    * "WebResponse.get_status_code()"
+
+    * "WebResponse.get_content()"
+
+  * "Dialog"
+
+    * "Dialog.print()"
+
+    * "Dialog.alert()"
+
+    * "Dialog.select()"
+
+    * "Dialog.confirm()"
+
+    * "Dialog.text()"
+
+    * "Dialog.number()"
+
+    * "Dialog.date()"
+
+    * "Dialog.show_diff()"
+
+    * "Dialog.table()"
+
+  * "ProgressBar"
+
+    * "ProgressBar.set()"
+
+    * "ProgressBar.unset()"
+
+  * "DirectoryHandler"
+
+    * "DirectoryHandler.open()"
+
+    * "DirectoryHandler.list_files()"
+
+    * "DirectoryHandler.list_subdirs()"
+
+    * "DirectoryHandler.get_subdirectory_handler()"
+
+    * "DirectoryHandler.open_file_for_writing()"
+
+    * "DirectoryHandler.close_all()"
+
+    * "DirectoryHandler.write_to_file()"
+
+    * "DirectoryHandler.read_from_file()"
+
+  * "WritableFileFromDirectoryHandler"
+
+    * "WritableFileFromDirectoryHandler.get_filename()"
+
+    * "WritableFileFromDirectoryHandler.write()"
+
+    * "WritableFileFromDirectoryHandler.close()"
+
+  * "Logger"
+
+    * "Logger.log()"
+
+    * "Logger.info()"
+
+    * "Logger.debug()"
+
+    * "Logger.error()"
+
+    * "Logger.critical()"
+
+    * "Logger.fatal()"
+
+    * "Logger.warn()"
+
+    * "Logger.warning()"
+
+    * "Logger.exception()"
+
+    * "Logger.setLevel()"
+
+  * "Modules"
+
+    * "Modules.get_module()"
+
+    * "Modules.get_base_url()"
+
+    * "Modules.viur_request()"
+
+  * "ListModule"
+
+    * "ListModule.preview()"
+
+    * "ListModule.structure()"
+
+    * "ListModule.view()"
+
+    * "ListModule.edit()"
+
+    * "ListModule.list()"
+
+    * "ListModule.add()"
+
+    * "ListModule.name"
+
+    * "ListModule.delete()"
+
+  * "TreeModule"
+
+    * "TreeModule.list_root_nodes()"
+
+    * "TreeModule.move()"
+
+    * "TreeModule.for_each()"
+
+    * "TreeModule.preview()"
+
+    * "TreeModule.structure()"
+
+    * "TreeModule.view()"
+
+    * "TreeModule.edit()"
+
+    * "TreeModule.list()"
+
+    * "TreeModule.add()"
+
+    * "TreeModule.name"
+
+    * "TreeModule.delete()"
+
+  * "SingletonModule"
+
+    * "SingletonModule.edit()"
+
+    * "SingletonModule.preview()"
+
+    * "SingletonModule.structure()"
+
+    * "SingletonModule.view()"
+
+    * "SingletonModule.name"
+
+  * "extract_items()"
+
+  * "map_extract_items()"
+
+
+
+Getting Started
+***************
+
+The Scriptor is built on Pyodide and interprets Python files as
+scripts. Each script has a “main” function, which is called once at
+the start, acting as the entry point for the script. The Scriptor
+provides additional modules for simplification. It includes functions
+and classes for dialogs, database-access, file-access, networking, and
+logging.
+
+Every newly created script always includes a default output with an
+alert dialog.
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       print("Hello World")
+
+The script showcases a simple "print" with the text “Hello World”. The
+documentation will explain various other ways of interacting with
+users as it progresses. Most functionality explained in this
+documentation has code-examples. All code-examples given in this
+documentation can be directly copied into an empty scriptor-script to
+try them out.
+
+
+Default import from viur.scriptor
+=================================
+
+The functions and classes provided by scriptor are usually imported
+with "from viur.scriptor import *". This imports the commonly used
+members directly into your scripts namespace. That means you don’t
+need to write the full name that you see in the API-doc. Here’s a
+table of readily imported functions, methods and classes:
+
+
+scriptor tools
+^^^^^^^^^^^^^^
+
++----------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+| name                                               | purpose                                                                                                                                                |
+|====================================================|========================================================================================================================================================|
+| "is_pyodide_context"                               | determining if the script is running in a pyodide-interpreter                                                                                          |
++----------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+| "is_pyodide_in_browser"                            | determining if the script is running in a browser                                                                                                      |
++----------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+| "WebRequest" and "WebResponse"                     | retrieving data from http(s)-servers                                                                                                                   |
++----------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+| "DirectoryHandler"                                 | working with directories and files in them                                                                                                             |
++----------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+| "Dialog"                                           | intracting with the user                                                                                                                               |
++----------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+| "File"                                             | working with data, getting files from and to the user                                                                                                  |
++----------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+| "logger"                                           | logging information                                                                                                                                    |
++----------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+| "modules"                                          | accessing database modules                                                                                                                             |
++----------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+| "extract_items" and "map_extract_items"            | extracting datapoints from a larger data-structure                                                                                                     |
++----------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+| "ProgressBar"                                      | showing progress to the user                                                                                                                           |
++----------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+| "print"                                            | showing text to the user                                                                                                                               |
++----------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+| "help"                                             | printing information about a python-object                                                                                                             |
++----------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+Also imported are "traceback", "ConnectionError" and "JsException" for
+handling exceptions, and "params", which contains parameters for the
+script.
+
+
+
+Asynchronicity
+**************
+
+Understanding asynchronicity in Python can be challenging at first,
+but here’s the basics:
+
+Asynchronous programming allows a program to handle many tasks at the
+same time. In traditional synchronous programming, tasks are performed
+one after the other. In asynchronous programming, tasks can be
+performed out of order, allowing a program to do more than one thing
+at a time. In the case of scriptor, this is necessary because the
+python-scripts run in pyodide, which runs in a JavaScript-Context,
+which is asynchronous. If scripts would run synchronously, the UI
+wouldn’t be able to respond anymore while the script is executing.
+That means you wouldn’t be able to see messages and the whole Browser
+would be unresponsive.
+
+
+async and await in Python
+=========================
+
+In Python, "async" and "await" are used to write asynchronous code.
+They help you manage and control asynchronous tasks.
+
+
+async Keyword
+-------------
+
+The "async" keyword is used to define an asynchronous function. An
+asynchronous function is a function that can be paused and resumed,
+allowing other code to run in the meantime. Also you can use the
+"await"-keyword only in "async"-functions and methods.
+
+
+await Keyword
+-------------
+
+The "await" keyword is used to pause the execution of an "async"
+function until an asynchronous task is completed. When the task is
+finished, the function resumes execution.
+
+
+
+Dialogs
+*******
+
+Dialogs are a crucial component for interacting with the user. The
+scriptor provides a variety of dialogue types, including alerts,
+confirmations, inputs, selects, comparisons of changed data, and
+tables.
+
+
+Print
+=====
+
+The simplest way to interact with a user is to show them text. This is
+done with the "print" function. Since this function is used very
+often, you can call it directly, in spite of it being a member of
+"Dialog". (Note that print doesn’t need to be awaited.)
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       Dialog.print("Hello World")
+       print("This works, too!")
+
+
+Alert
+=====
+
+When an "alert" is triggered, a message is displayed, and the script
+waits until the ‘OK’ button is clicked.
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       await Dialog.alert("Hello World")
+       print("done")
+
+
+Confirm
+=======
+
+A "confirm"-element is a component that represents a simple yes/no
+dialog. It allows the user to confirm an action or cancel it. After
+the user interacts with the "confirm"-element, it returns one of two
+values: "True" or "False".
+
+Here is a simple example where the user is prompted using a
+"confirm"-element to determine whether the program should continue or
+be stopped.
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       # Ask the user if the program should proceed (interaction)
+       ret = await Dialog.confirm("Should we proceed?")
+
+       # ret can be True or False (Yes/No)
+
+       if not ret:
+           print("Stop!") # We will print an output for debug
+           return # will stop the whole program
+
+       # Done!
+       print("Done!")
+
+
+Select
+======
+
+The "select"-element is the generalized version of the
+"confirm"-element. As the name suggests, you can prompt the user with
+a selection of elements you provide.
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       selections = ["Option A", "Option B", "Option C"]
+       ret = await Dialog.select(selections)
+       print(f"""you selected {ret}""")
+
+The return value will be the name of the selected element. Multiselect
+is also supported:
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       selections = ["Option A", "Option B", "Option C"]
+       ret = await Dialog.select(selections, multiselect=True)
+       print(f"""you selected {ret}""")
+
+The return-value will be a list of the selected elements. You can also
+specify the return-values for the different selections. This works
+with and without multiselect:
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       selections = {
+           "Option A": 1,
+           "Option B": 2,
+           "Option C": 3,
+       }
+       ret = await Dialog.select(selections)
+       print(f"""you selected {ret}""")
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       selections = {
+           "Option A": 1,
+           "Option B": 2,
+           "Option C": 3,
+       }
+       ret = await Dialog.select(selections, multiselect=True)
+       print(f"""you selected {ret}""")
+
+
+Data-input
+==========
+
+Input-elements are used to get data from the user.
+
+
+Text
+----
+
+A "text"-element is another type that expects user input in the form
+of strings, or multi-line strings. It provides a way for users to
+enter and submit data.
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       ret = await Dialog.text("What's your name?")
+
+       print("Your name is: "+ ret)
+
+It’s also possible to let the user input multiline-strings like this:
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       ret = await Dialog.text("What's your address?", multiline=True)
+
+       print("Your address is:\n"+ ret)
+
+Additionaly, there’s an option to provide a default value to the user:
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       ret = await Dialog.text("What's your name?", default_value="Mausbrand")
+
+       print("Your name is: "+ ret)
+
+       ret = await Dialog.text("What's your address?", multiline=True,
+           default_value="Mausbrand Informationssysteme GmbH\nSpeicherstraße 33\n44147 Dortmund")
+
+       print("Your address is:\n"+ ret)
+
+
+Numbers
+-------
+
+Another input type is a "number", where the number can be either an
+integer or a floating-point number. For example, if the value “1.5” is
+given as an input, the output will be a "float" variable. However, if
+the number is an integer, the output type will be returned as "int".
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       age = await Dialog.number("How old are you?")
+       print(f"You are {age} years old.")
+
+As with "text", you can provide a default value:
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       age = await Dialog.number("How old are you?", default_value=20)
+       print(f"You are {age} years old.")
+
+
+Date
+----
+
+Often, documentation requires including information such as dates and
+times. To facilitate this, the Scriptor provides the ability to input
+date values. Unlike other input types, this returns a "date"- or
+"datetime"-object.
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       date = await Dialog.date("When were you born?")
+       print(f"You were born on {date}.")
+
+In this example, the "date" variable is of type "datetime.date".
+Therefore, you can utilize all the functions provided by the Python
+standard library’s "datetime"-module. If you want the user to input a
+time as well, you need to use the "use_time"-parameter:
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       date = await Dialog.date("When were you born?", use_time=True)
+       print(f"You were born on {date}.")
+
+This example will ask for a date and a time and therefore return a
+"datetime.datetime"-object.
+
+   Similar to "text" and "number", there’s an option for a default value. In this case, there are several
+   format-options:
+   The "default_value" can be a "datetime.date", a "datetime.datetime" or an ISO-format-date-string like
+   ""2024-12-24"" or ""2024-12-24 23:59:59"". The behaviour depends on if "use_time" is set to "True" or not.
+   If it is, "datetime" and an ISO-string with a time will work as expected, a "date" or an ISO-string without time
+   will produce a "default_value" on that date at midnight.
+   If it is not, "date" and an ISO-string without time will work as expected. If "default_value" is a "datetime"
+   or an ISO-string with a time, the time is simply ignored.
+
+
+Diff
+====
+
+Somethimes, when data has to be changed in the database, the user
+needs to confirm this first. Of course, you should use a
+"Dialog.confirm" to do this, but you might want to show the user the
+data that changed first. This is what "show_diff" is for. With it, you
+can show the names of changed fields, their old and their new values.
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       await Dialog.show_diff(
+           title="Here's what changed:",
+           diffs=[
+               ("name", "John", "Bob"),
+               ("age", 37, 38)
+           ]
+       )
+
+
+Table
+=====
+
+The last remaining Dialog-type is the "table". It is used to show
+tabular data, but can also be used to select rows. This example shows
+how to display a simple table:
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       tbl_head = ["Name", "Age"]
+       tbl_data = [
+           ["John", 37],
+           ["Bob", 38]
+       ]
+       await Dialog.table(tbl_head, tbl_data)
+
+This example shows how to show the same table, but let the user pick a
+line.
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       tbl_head = ["Name", "Age"]
+       tbl_data = [
+           ["John", 37],
+           ["Bob", 38]
+       ]
+       result = await Dialog.table(tbl_head, tbl_data, select=True)
+       print(f"you selected row {result}")
+
+There is also an option to select multiple rows:
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       tbl_head = ["Name", "Age"]
+       tbl_data = [
+           ["John", 37],
+           ["Bob", 38]
+       ]
+       result = await Dialog.table(tbl_head, tbl_data, select=True, multiselect=True)
+       print(f"you selected row {result}")
+
+
+
+Files
+*****
+
+Files, in general, are for storing data. In Scriptor, there is a set
+of typical tasks where files are involved. The "File"-class provides
+several methods to do those tasks easily and efficiently.
+
+Note:
+
+  In the first examples, we’ll use the "download"-method of "File" to
+  make your browser download it. This will be explained later in this
+  document.
+
+
+Creating Files from Data
+========================
+
+
+from_string
+-----------
+
+This method is used to create a File from a "string" (aka. a text-
+file).
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       file = File.from_string("Hello World", "hello_world.txt")
+       file.download()
+       print("Please check your downloads. You should have a new file called hello_world.txt")
+
+
+from_bytes
+----------
+
+Similar to the "from_string"-Method, this method creates a File from
+"bytes". This is usually useful for working with files like xlsx, zip,
+pdf, etc. (Also there are extra convenience-methods for handling
+tables.)
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       file = File.from_bytes(b"Hello World", "hello_world.txt")
+       file.download()
+       print("Please check your downloads. You should have a new file called hello_world.txt")
+
+
+from_table
+----------
+
+This method can handle two different representations of tables and
+create a xlsx- or csv-file from them. Tables can either be defined as
+lists of dicts or lists of lists. In the case of dicts, the keys from
+the dict must match the headers of the table. If no header is
+specified explicitly, it is automatically generated from the
+dictionaries’ keys. In case of a list of lists, the first list in the
+outer list is considered the header if no header is defined
+explicitly.
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       tbl_head = ["Name", "Age"]
+       tbl_data = [
+           ["John", "37"],
+           ["Bob", "38"]
+       ]
+       file = File.from_table(tbl_data, tbl_head, filename="simple_table.xlsx")
+       file.download()
+       print("Please check your downloads."
+             " You should have a new file called simple_table.xlsx")
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       tbl = [
+           {"Name": "John", "Age": "37"},
+           {"Name": "Bob", "Age": "38"}
+       ]
+       file = File.from_table(tbl, filename="simple_table2.xlsx")
+       file.download()
+       print("Please check your downloads."
+             " You should have a new file called simple_table2.xlsx")
+
+As you may have noticed, in this example, the ages are defined as
+strings. This is because tables generally consists of strings only. If
+you have other types in your data, they can be converted
+automatically, but you need to explicitly enable this functionality by
+setting "auto_str" to "True".
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       tbl_head = ["Name", "Age"]
+       tbl_data = [
+           ["John", 37],
+           ["Bob", 38]
+       ]
+       file = File.from_table(
+           tbl_data,
+           tbl_head,
+           filename="simple_table3.xlsx",
+           auto_str=True
+       )
+       file.download()
+       print("Please check your downloads."
+             " You should have a new file called simple_table3.xlsx")
+
+Sometimes, especially while developing a new script, you may have
+incomplete data, that you want to save anyway, just to see what it
+looks like. To achieve this, you just have to set "fill_empty" to
+"True".
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       tbl_head = ["Name", "Age"]
+       tbl_data = [
+           ["John", 37],
+           ["Bob"]  # missing age
+       ]
+       file = File.from_table(
+           tbl_data,
+           tbl_head,
+           filename="simple_table4.xlsx",
+           fill_empty=True,
+           auto_str=True
+       )
+       file.download()
+       print("Please check your downloads."
+             " You should have a new file called simple_table4.xlsx")
+
+Besides xlsx, csv is supported. You can just change the file-name and
+it will automatically generate the right format.
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       tbl_head = ["Name", "Age"]
+       tbl_data = [
+           ["John", 37],
+           ["Bob"]  # missing age
+       ]
+       file = File.from_table(
+           tbl_data,
+           tbl_head,
+           filename="simple_table5.csv",
+           fill_empty=True,
+           auto_str=True
+       )
+       file.download()
+       print("Please check your downloads."
+             " You should have a new file called simple_table5.csv")
+
+The default delimiter for csv-files is a comma (,), but sometimes,
+especially for Excel in europe, you might want to use a semicolon (;).
+This is simply achieved by passing it as the parameter "csv_delimiter"
+(if you pass it while generating xlsx, it is ignored).
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       tbl_head = ["Name", "Age"]
+       tbl_data = [
+           ["John", 37],
+           ["Bob"]  # missing age
+       ]
+       file = File.from_table(
+           tbl_data,
+           tbl_head,
+           filename="simple_table6.csv",
+           fill_empty=True,
+           auto_str=True,
+           csv_delimiter=";"
+       )
+       file.download()
+       print("Please check your downloads."
+             " You should have a new file called simple_table6.csv")
+
+
+Getting information about the File
+==================================
+
+
+get_filename
+------------
+
+The "get_filename"-method returns, as the name suggests, the name of
+the file.
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       file = File.from_string("Hello World", "hello_world.txt")
+       filename = file.get_filename()
+       print(f"The file you just created has the name {filename}")
+
+
+get_size
+--------
+
+The "get_size"-method returns the size of the file in bytes.
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       file = File.from_string("Hello World", "hello_world.txt")
+       filesize = file.get_size()
+       print(f"The file has a size of {filesize} bytes.")
+
+
+Using Data from a File
+======================
+
+Files can also be user-input (this is explained later, we use demo-
+data in the following examples). In that case, you want to get data
+from the file. Files from user-input usually contain text or tabular
+data, so there are extra methods for handling those easily.
+
+
+as_bytes
+--------
+
+The "as_bytes"-method returns the complete data of the file as a
+"bytestring".
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       file = File.from_string("Hello World", "hello_world.txt")
+       content = file.as_bytes()
+       print(content)
+
+
+as_text
+-------
+
+The "as_text"-method returns the complete data of the file as a
+decoded "string", if possible. If not, it raises an error.
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       file = File.from_string("Hello World", "hello_world.txt")
+       content = file.as_text()
+       print(content)
+
+
+as_object_from_json
+-------------------
+
+If the file the user provided is a json-file, this method will convert
+it to a python-object.
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       file = File.from_string("""
+           {"key": "value", "a_list_of_ints": [1,2,3,4], "a_float_value": 1.23}
+       """, "demo.json")
+       content = file.as_object_from_json()
+       print(content)
+
+
+as_list_table and as_dict_table
+-------------------------------
+
+Mostly, user-provided data comes in the form of tables. These can be
+loaded as the aforementioned two representations: a list of dicts or a
+list of lists.
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       tbl_head = ["Name", "Age"]
+       tbl_data = [
+           ["John", "37"],
+           ["Bob", "38"]
+       ]
+       file = File.from_table(tbl_data, tbl_head, filename="simple_table.xlsx")
+       print(file.as_list_table())
+       print(file.as_dict_table())
+
+
+Getting the file to and from your PC
+====================================
+
+
+download
+--------
+
+The "download"-method provides the simplest way to get data from
+scriptor to your PC. As you have seen from the earlier examples, it
+just triggers a download so your browser saves the file or asks for
+where to save it (depending on your browsers settings).
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       file = File.from_string("Hello World", "hello_world.txt")
+       file.download()
+       print("Please check your downloads. You should have a new file called hello_world.txt")
+
+If you try to download more than one file in the same script, your
+browser may ask you if you want to allow the website (scriptor) to do
+this. You can try it out with this code:
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       File.from_string("Hello World", "download1.txt").download()
+       File.from_string("Hello World", "download2.txt").download()
+       File.from_string("Hello World", "download3.txt").download()
+
+
+open_dialog
+-----------
+
+The "open_dialog" prompts the user to select a file from their PC. The
+data from the selected file will get loaded into scriptor. The file
+itself remains as it is. If the user cancels the dialog, an error will
+be raised and the script stops (unless you handle the error
+differently).
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       print("Please select a simple text-file.")
+       textfile = await File.open_dialog()
+       print(textfile.as_text())
+
+
+save_dialog
+-----------
+
+The "save_dialog" is the counterpart to the "open_dialog" and provides
+an alternative to the "download"-method. The user is prompted to save
+the file. They can choose to select an existing file, which will then
+get overwritten, or a new filename that doesn’t exist yet, which will
+then be created. This also means that the file can be saved with a
+different name than defined in your code. As with the "open_dialog",
+if the user cancels the dialog, an error will be raised.
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       print("Please select where to save the test-file.")
+       testfile = File.from_string("Hello World", "save_test.txt")
+       await testfile.save_dialog()
+
+
+
+ProgressBar
+***********
+
+The "ProgressBar" is used to visualize progress, i.e. for tasks that
+take a long time. It has a "set"- and an "unset"-method. With the
+"set"-method, you can signal the progress of your task to scriptor.
+With the "unset"-method you hide the progressbar when you’re done.
+
+Here’s an example. We also import "time" to make the script wait
+("sleep") in every step, to simulate work. Otherwise the progressbar
+would fill so fast and then be hidden, that you wouldn’t be able to
+see it.
+
+   #### scriptor ####
+   from viur.scriptor import *
+   import time
+
+   async def main():
+       letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+       counter = 0
+       for letter in letters:
+           counter += 1
+           ProgressBar.set(
+               counter/len(letters)*100,
+               counter,
+               len(letters),
+               f"Currently working on {letter}"
+           )
+           time.sleep(0.2)
+       ProgressBar.unset()
+
+
+
+Logger
+******
+
+The logger provides, as the name suggests, methods for logging
+information. In the browser, this mainly means colored messages, but
+it is important for scripts that get executed in the server-backend.
+There’s an already preconfigured instance under the name "logger" (all
+lower-case-letters). The provided methods are "log", "info", "debug",
+"error", "critical", "fatal", "warning", "warn" (does the same as
+"warning") and "exception". Except for the "exception"-method, all
+these log only the info you provided. The "exception"-method also logs
+the last error that occured in the script.
+
+Also there is a "setLevel"-method. The level set with this method
+supresses log-messages with a lower level, i.e. if you set it to fatal
+or critcal, no errors, warnings, infos or debug-messages will be
+shown. The default level is info, so no debug-messages are shown. The
+order is debug, info, warning (you cannot set to warn), error and
+critical/fatal (these two are on the same level).
+
+The last remaining method of the Logger is "log". It combines all the
+other methods and thus has an additional parameter called "level".
+That means "logger.info("message")" does the same as
+"logger.log("info", "message")".
+
+Here’s an example to show you all of it (try it out in scriptor).
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       logger.setLevel("debug")
+
+       logger.debug("this is a debug-message")
+       logger.info("this is an info-message")
+       logger.error("this is an error-message")
+       logger.critical("this is a critical-message")
+       logger.fatal("this is a fatal-message")
+       logger.warn("this is a warn-message")
+       logger.warning("this is a warning-message")
+       logger.exception("this is an exception-message")
+
+       logger.setLevel("critical")
+       print("*** the loggers level was changed here ***")
+
+       logger.debug("this is a debug-message")
+       logger.info("this is an info-message")
+       logger.error("this is an error-message")
+       logger.critical("this is a critical-message")
+       logger.fatal("this is a fatal-message")
+       logger.warn("this is a warn-message")
+       logger.warning("this is a warning-message")
+       logger.exception("this is an exception-message")
+
+
+
+WebRequest
+**********
+
+The "WebRequest"-class handles HTTP(S)-requests. It supports GET,
+POST, PUT and DELETE operations. The main functionality is in the
+"request"-method, to which you have to pass the "method"-parameter.
+For convenience there are the explicit methods "get", "post", "put"
+and "delete".
+
+In the browser, some requests might not succeed because of CORS-
+policies (Cross Origin Resource Sharing: see the wikipedia article for
+CORS). This will raise an exception.
+
+The return value of all methods of "WebRequest" is a "WebResponse".
+"WebResponse" inherits all functionality from "File", so you can use
+all methods of it (i.e. as_text, as_list_table etc.). Additionaly
+there is "get_url", "get_status_code" and "get_content". The
+"get_status_code" method returns the HTTP-Status code. This should be
+a value between (incl.) 200 and 299 if the request was successful.
+Otherwise the code will indicate what went wrong (see the wikipedia
+article for HTTP-Status-Codes).
+
+
+
+DirectoryHandler
+****************
+
+The "DirectoryHandler" is a class with which you can open directories
+on your PC. You can read, write and list files as well as
+subdirectories.
+
+Warning:
+
+  The "write_to_file"-method replaces the content of the file you
+  selected (if it already existed). The "open_file_for_writing"-method
+  will also clear the content of any existing selected file before
+  writing. Be careful not no open files for writing if you still need
+  their current content.
+
+Note:
+
+  Some of the following examples need specific files to exist in the
+  directory you open. Ideally, you’d create an empty directory and
+  execute the examples in order. The earlier examples show how to
+  create files and will create the files the latter examples need.
+
+
+open
+====
+
+The "open"-method prompts the user to open a directory. If it’s the
+first time that directory is opened since your scriptor-session
+started, you’ll get asked for permissions by the browser. (see next
+example)
+
+
+list_files and list_subdirs
+===========================
+
+The "list_files"- and "list_subdirs"-methods return a list of all
+files and a list of all directories in the selected directory
+respectively. (see next example)
+
+
+write_to_file
+=============
+
+The "write_to_file"-method writes binary data to a file. If the file
+already exists it will raise an error, unless you passed
+"may_already_exist" as "True". If you did, it will completely replace
+the files content. (see "open_file_for_writing" example)
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       my_dir = await DirectoryHandler.open()
+       files_in_dir = await my_dir.list_files()
+       subdirs_in_dir = await my_dir.list_subdirs()
+       print(f"""These files are in the directory you selected: {files_in_dir}""")
+       print(f"""These subfolders are in the directory you selected: {subdirs_in_dir}""")
+       if "test.bin" in files_in_dir:
+           print("test.bin already exists")
+       else:
+           await my_dir.write_to_file(b"This is a test-file!", "test.bin")
+           print("created test.bin")
+
+
+open_file_for_writing
+=====================
+
+The "open_file_for_writing"-method is intended to be used if the data
+can’t be written in one step, i.e. if it’s too big for your computers
+memory. It returns a "WritableFileFromDirectoryHandler", which allows
+you to write data piece by piece.
+("WritableFileFromDirectoryHandler"-objects need to be explicitly
+closed, otherwise data will not be persisted correctly. It has a
+"close"-method, and there’s a "close_all"-method in the
+"DirectoryHandler". Both will get explained later in this document, as
+well as the "read_from_file"-method.)
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       my_dir = await DirectoryHandler.open()
+       files_in_dir = await my_dir.list_files()
+       subdirs_in_dir = await my_dir.list_subdirs()
+       writable = await my_dir.open_file_for_writing(
+           "writable_test.bin",
+           may_already_exist=True
+       )
+       await writable.write(b"Hello ")
+       await writable.write(b"World!\n")
+       await my_dir.close_all()
+       print("Please try to open the writable_test.bin that just got created in a text-editor."
+             " Here's a preview of it's content:")
+       print(await my_dir.read_from_file("writable_test.bin"))
+
+
+close_all
+=========
+
+The "close_all"-method closes all file-handles originating from this
+"DirectoryHandler" or any of it’s children (subdirectories, see
+below). Files need to be explicitly closed to guarantee all data has
+been written properly. This only applies to files opened with
+"open_file_for_writing". If you use the "write_to_file"-method, the
+file will be closed automatically after the data has been written.
+
+
+get_subdirectory_handler
+========================
+
+The "get_subdirectory_handler"-method creates a new "DirectoryHandler"
+for a subdirectory. This "DirectoryHandler" works exactly the same way
+as the one creating it, just on a subdirectory. Also the
+root-"DirectoryHandler" keeps a reference to it, so "close_all" only
+needs to be called on the root-"DirectoryHandler".
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       my_dir = await DirectoryHandler.open()
+       subdir = await my_dir.get_subdirectory_handler("new_subdir", create=True)
+       try:
+           await subdir.write_to_file(b"data", "filename.txt")
+       except ValueError as ve:
+           print(ve)
+           return
+       finally:
+           await my_dir.close_all()
+       print("Inside the directory you picked, there should now be a new"
+             " subdirectory called new_subdir.")
+       print("Inside it, you should find a file called filename.txt")
+
+
+read_from_file
+==============
+
+The "read_from_file"-method reads data from a file. You can either
+read the whole file, or pass a "start"- and/or "end"-parameter to read
+only a part of the file. (If you haven’t, please execute the first
+example-script from this document. The test.bin created by it is
+expected to be in the directory we’re using in this example.)
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       my_dir = await DirectoryHandler.open()
+       complete_content = await my_dir.read_from_file("test.bin")
+       print("complete file content: ", complete_content)
+       print("number of bytes in the file: ", len(complete_content))
+       first_four = await my_dir.read_from_file("test.bin", end=4)
+       print("first four bytes: ", first_four)
+       five_to_fifteen = await my_dir.read_from_file("test.bin", start=5, end=15)
+       print("bytes 5 to 15: ", five_to_fifteen)
+       last_five = await my_dir.read_from_file("test.bin", start=-5)
+       print("the last 5 bytes: ", last_five)
+
+
+
+Modules
+*******
+
+The "Modules"-class provides access to the database-modules. In
+scriptor, there’s a preconfigured instance under the name "modules"
+(all lowercase) connected to your viur backend. Accessing a module is
+simply done by calling "get_module".
+
+Here’s an example to retrieve all users and print them:
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       users = await modules.get_module("user")
+       async for user in users.list():
+           print(user)
+
+Depending on the type of module, the result of "get_module" differs.
+It can return a "ListModule", a "TreeModule" or a "SingletonModule".
+
+The methods available in all of them are "view", "edit", "structure"
+and "preview".
+
+"TreeModule" and "ListModule" additionaly have "list", "add", "delete"
+and "for_each".
+
+In addition to that, "TreeModule" also has "list_root_nodes" and
+"move".
+
+"TreeModule" and "ListModule" also need an extra parameter for
+methods, that interact with the database. For "ListModule", this is
+"group". The group parameter filters only records that belong to that
+group and also potentially modifies the returned model (i.e. if you’re
+selling kitchen supplies, pans might have a diameter, which would be
+unused for knives). For "TreeModule", the extra parameter is
+"skel_type". It can have one of two values: "node" or "leaf". This
+determines what parts of the tree will be returned (i.e. for scriptor-
+scripts, scripts are leaves and the folders are nodes).
+
+Since examples are specific to the database and its configuration, the
+first ones assume you have a module called “example” that has at least
+the fields “name” and “sortindex”.
+
+Here’s how you’d create five new records with the name test and
+sortindex ranging from 1 to 5.
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       example_entries_to_add = 5
+       example = await modules.get_module("example")
+       for i in range(example_entries_to_add):
+           ProgressBar.set(i/example_entries_to_add*100, i, example_entries_to_add, str(i))
+           await example.add({"name": "test", "sortindex": i+1})
+       ProgressBar.unset()
+
+The next example shows, how to get all records with the name “test”
+and rename one of them. It also shows the number of records named
+“test” before and after the edit.
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       example = await modules.get_module("example")
+       test = await gather_async_iterator(example.list(params={"name": "test"}))
+       print(f"""Number of records with name "test": {len(test)}""")
+       try:
+           print(f"""The record we'll edit:\n{test[0]}""")
+           test_key = test[0]["key"]
+       except IndexError:
+           print("""Nothing to do, there are not records with the name "test" left.""")
+           return
+       print(f"""Key of the record we'll edit: {test_key}""")
+       await example.edit(key=test_key, params={"name": "test_edited"})
+       test_after_edit = await gather_async_iterator(example.list(params={"name": "test"}))
+       print(f"""Number of records with name "test" after editing: {len(test_after_edit)}""")
+       edited_test = await example.view(key=test_key)
+       print(f"""The edited record:\n{edited_test}""")
+
+After creating and renaming test records, you might want to delete
+them from the database. This example shows how to delete all records
+with the name “test_edited”:
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+
+       example = await modules.get_module("example")
+       test = await gather_async_iterator(example.list(params={"name": "test_edited"}))
+       print(f"""Number of records with name "test_edited": {len(test)}""")
+       for t in test:
+           print(f"""deleting record with id {t["key"]}""")
+           res = await example.delete(key=t["key"])
+       test_after_deletes = await gather_async_iterator(
+           example.list(params={"name": "test_edited"})
+       )
+       print(f"""Number of records with name "test_edited" after deletion:"""
+             f"""{len(test_after_deletes)}""")
+
+As a final example, here’s how to export all scriptor-scripts to a
+compressed zip-file. We won’t demonstrate how to modify or delete
+scripts here.
+
+   #### scriptor ####
+   from viur.scriptor import *
+   from io import BytesIO
+   from zipfile import ZipFile, ZIP_DEFLATED
+
+
+   async def main():
+       script = await modules.get_module("script")
+       scriptleaves = await gather_async_iterator(script.list(params={"skelType": "leaf"}))
+       bio = BytesIO()
+       script_count = len(scriptleaves)
+       with ZipFile(bio, "w", compression=ZIP_DEFLATED, compresslevel=9) as z:
+           for n, s in enumerate(scriptleaves):
+               name = s["name"]
+               ProgressBar.set(n/script_count*100, n, script_count, name)
+               try:
+                   z.writestr(s["path"], s["script"])
+               except KeyError:
+                   z.writestr(name, s["script"])
+           ProgressBar.unset()
+       bio.seek(0)
+       zip_bytes = bio.read()
+       bio.close()
+       zipname = f"""ScriptorScripts.zip"""
+       print(f"""downloading "{zipname}" ({len(zip_bytes):_} b)""")
+       out_file = File.from_bytes(zip_bytes, zipname)
+       out_file.download()
+       print("...done")
+
+
+
+Utilities
+*********
+
+
+extract_items and map_extract_items
+===================================
+
+A task scriptor is often used for is the extraction of data (most
+commonly into a table). "extract_items" and "map_extract_items" are
+aimed to ease the extraction of datapoints. They don’t cover every
+use-case, but the most common ones, and thus spare the developers of
+new scripts most of the repetitive work. Since examples working with
+the database would need to be highly specific to the customers data,
+we’ll use fictional demo-data.
+
+This example shows how to extract the first names of a user and the
+first names of all of their friends. The demo-data contains two users,
+which are iterated over inside "map_extract_items". The mapping
+defines, what data will be extracted from the given input-data and
+which name it will get in the result. The extraction of the first name
+of the user is simple: As you would select the first_name from a
+dictionary with "dictionary["first_name"]", you have to add
+""first_name"" to the extractor-list. Similarly, you’d select the
+friends of a user with "dictionary["friends"]", which would be a
+"list" you’d need to iterate over. To signal to the extractor, that
+you want to iterate it, you can write three dots ("...") called
+"Ellipsis" in Python. The following selectors then get applied to each
+element of the "list". The result of this is then printed. Afterwards
+a table-file is made from the data, which is then converted to a list
+of lists representing the tables data, which is then shown in a
+"Dialog.table".
+
+The "join_with"-parameter defines how list-elements are concatenated.
+Setting it implies that all results are converted to "string". Try
+removing it from the example code. You’ll see, that the friends names
+aren’t in a single "string" anymore, but in a "list". This will also
+lead to the "Dialog.table" raising an error. This is useful if you
+want to modify the data before saving or displaying it.
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       demo_data = [
+           {
+               "first_name": "Peter",
+               "last_name": "Jones",
+               "friends": [
+                   {"first_name": "Darrell", "last_name": "Bryant"},
+                   {"first_name": "Julie", "last_name": "Brooks"},
+                   {"first_name": "Erin", "last_name": "Jimenez"}
+               ]
+           },
+           {
+               "first_name": "Amy",
+               "last_name": "Stephenson",
+               "friends": [
+                   {"first_name": "Christina", "last_name": "Allen"},
+                   {"first_name": "Joel", "last_name": "Alvarez"},
+                   {"first_name": "Melanie", "last_name": "Rivera"},
+                   {"first_name": "Erica", "last_name": "Nicholson"},
+                   {"first_name": "Roy", "last_name": "Weaver"}
+               ]
+           }
+       ]
+       mapping = {
+           "First Name": ["first_name"],
+           "Friends first Names": ["friends", ..., "first_name"]
+       }
+       extracted_data = map_extract_items(demo_data, mapping, join_with=", ")
+       table_file = File.from_table(extracted_data)
+       list_table_header, *list_table_data = table_file.as_list_table()
+       await Dialog.table(list_table_header, list_table_data)
+
+Note that "map_extract_items" recognises if you pass a "list" or a
+"dict". If you pass a "list", it will automatically assume the mapping
+applies to the items of the "list" and iterate over it.
+
+That means that "extracted_data = map_extract_items(demo_data,
+mapping, join_with=", ")" does the same as
+
+   extracted_data = []
+   for user in demo_data:
+       extracted_data.append(map_extract_items(user, mapping, join_with=", "))
+
+If you want to extract more complex data, or want to transform the
+data, you need to iterate over the result of "map_extract_items". In
+this example, we’ll do the same as before, but also extract the last
+names of the friends. Note that we removed the "join_with"-parameter,
+because we need the names as a "list".
+
+   #### scriptor ####
+   from viur.scriptor import *
+
+   async def main():
+       demo_data = [
+           {
+               "first_name": "Peter",
+               "last_name": "Jones",
+               "friends": [
+                   {"first_name": "Darrell", "last_name": "Bryant"},
+                   {"first_name": "Julie", "last_name": "Brooks"},
+                   {"first_name": "Erin", "last_name": "Jimenez"}
+               ]
+           },
+           {
+               "first_name": "Amy",
+               "last_name": "Stephenson",
+               "friends": [
+                   {"first_name": "Christina", "last_name": "Allen"},
+                   {"first_name": "Joel", "last_name": "Alvarez"},
+                   {"first_name": "Melanie", "last_name": "Rivera"},
+                   {"first_name": "Erica", "last_name": "Nicholson"},
+                   {"first_name": "Roy", "last_name": "Weaver"}
+               ]
+           }
+       ]
+       mapping = {
+           "First Name": ["first_name"],
+           "friends_first_names": ["friends", ..., "first_name"],
+           "friends_last_names": ["friends", ..., "last_name"]
+       }
+       extracted_data = []
+       for row in map_extract_items(demo_data, mapping):
+           row["Friends Names"] = ", ".join(f"""{first_name} {last_name}""" for
+                                            first_name, last_name in
+                                            zip(row["friends_first_names"],
+                                                row["friends_last_names"])
+                                           )
+           del row["friends_first_names"]
+           del row["friends_last_names"]
+           extracted_data.append(row)
+       table_file = File.from_table(extracted_data)
+       list_table_header, *list_table_data = table_file.as_list_table()
+       await Dialog.table(list_table_header, list_table_data)
+
+
+
+API Reference
+*************
+
+class viur.scriptor.file.File(data: bytes, filename: str = None)
+
+   Represents an opened file or data. Used to open files from the user
+   or build files for the user to download.
+
+   Parameters:
+      * **data** – The "bytes" the file should contain.
+
+      * **filename** – The name the file should have.
+
+   classmethod from_string(text: str, filename: str = 'text.txt')
+
+      creates a text-file from a string
+
+      Parameters:
+         * **text** – "string"-content the file should have
+
+         * **filename** – name the file should have
+
+      Returns:
+         "File"-object
+
+   classmethod from_bytes(data: bytes, filename: str = 'bytes.bin')
+
+      creates a binary file from "bytes"
+
+      Parameters:
+         * **data** – "bytes" the file should contain
+
+         * **filename** – name the file should have
+
+      Returns:
+         "File"-object
+
+   classmethod from_table(table: list[list[str, ...]] | list[dict[str, str]], header: list[str] = None, filename: str = 'table.xlsx', fill_empty: bool = False, auto_str: bool = False, csv_delimiter=',')
+
+      creates a CSV- or XLSX-file containing a single table
+
+      Parameters:
+         * **table** – table that should be saved: Either a "list" of
+           "list"s or a "list" of "dict"s (one for each row)
+
+         * **header** – (optional) header of the table, if "table" is
+           a "list" of "dict"s, the header defines the order of
+           columns
+
+         * **filename** – name the file should have
+
+         * **fill_empty** – if true, missing data is replaced by an
+           empty "string" (this is primarily intended for testing and
+           debugging)
+
+         * **auto_str** – if true, all keys and values are
+           automatically converted to str
+
+         * **csv_delimiter** – the delimiter used to separate fields
+           in csv-tables, ignored for xlsx
+
+      Returns:
+         "File"-object
+
+   get_filename()
+
+      returns the name of the file
+
+      Returns:
+         name of the file
+
+   get_size()
+
+      returns the size of the files data in bytes
+
+      Returns:
+         the size of the files data in bytes
+
+   as_bytes()
+
+      returns the content of the file as "bytes"
+
+      Returns:
+         file-data
+
+   as_text(encoding: str = None)
+
+      decodes the whole content of the file as a string and returns it
+
+      Parameters:
+         **encoding** – (optional) if set, the content of the file is
+         decoded using this encoding, otherwise the encoding is
+         automatically guessed
+
+      Returns:
+         content of the file as a "string"
+
+   as_object_from_json()
+
+      parses JSON-data to a python-object representing the decoded
+      data of the json-file, throws an exception if the file is not a
+      valid JSON-file
+
+      Returns:
+         python-object represented by the JSON-file
+
+   as_list_table(csv_delimiter=None)
+
+      loads tabular data (i.e. a csv- or xlsx-file) as a "list" of
+      "list"s
+
+      Returns:
+         "list" of "list"s representing a table
+
+   as_dict_table(csv_delimiter=None)
+
+      loads tabular data (i.e. a csv- or xlsx-file) as a "list" of
+      "dict"s
+
+      Returns:
+         "list" of "dict"s representing a table
+
+   async classmethod open_dialog(prompt: str = 'Please select a file to open:')
+
+      asks the user for a file to open
+
+      Parameters:
+         **prompt** – (optional) the prompt the user will read
+
+      Returns:
+         "File"-object
+
+   download()
+
+      downloads the file to the users download-directory
+
+class viur.scriptor.requests.WebRequest
+
+   provides methods to request data from HTTP-Servers
+
+   async classmethod get(url, params=None, headers=None, **kwargs)
+
+      handles HTTP-GET-requests
+
+      Parameters:
+         * **url** – the URL of the endpoint
+
+         * **params** – parameters of the request (for the query
+           string)
+
+         * **headers** – HTTP-headers to send with the request
+
+         * **kwargs** – additional parametrs
+
+      Returns:
+         "WebResponse"
+
+   async classmethod download(url, **kwargs)
+
+      convenience-method for simple HTTP-GET-Reuests that don’t need
+      parameters or headers
+
+      Parameters:
+         * **url** – the URL of the endpoint
+
+         * **kwargs** – additional parameters
+
+      Returns:
+         "WebResponse"
+
+   async classmethod post(url, data, params=None, headers=None, **kwargs)
+
+      handles HTTP-POST-requests
+
+      Parameters:
+         * **url** – the URL of the endpoint
+
+         * **data** – the data to send to the endpoint
+
+         * **params** – parameters of the request
+
+         * **headers** – HTTP-headers to send with the request
+
+         * **kwargs** – additional parametrs
+
+      Returns:
+         "WebResponse"
+
+   async classmethod put(url, data, params=None, headers=None, **kwargs)
+
+      handles HTTP-PUT-requests
+
+      Parameters:
+         * **url** – the URL of the endpoint
+
+         * **data** – the data to send to the endpoint
+
+         * **params** – parameters of the request
+
+         * **headers** – HTTP-headers to send with the request
+
+         * **kwargs** – additional parametrs
+
+      Returns:
+         "WebResponse"
+
+   async classmethod delete(url, params, data, headers, **kwargs)
+
+      handles HTTP-DELETE-requests
+
+      Parameters:
+         * **url** – the URL of the endpoint
+
+         * **data** – the data to send to the endpoint
+
+         * **parameters** – parameters of the request
+
+         * **headers** – HTTP-headers to send with the request
+
+         * **kwargs** – additional parametrs
+
+      Returns:
+         "WebResponse"
+
+   async classmethod request(method: str, url, **kwargs)
+
+      handles general HTTP-requests
+
+      Parameters:
+         * **method** – the method to use (GET, PUT, POST or DELETE)
+
+         * **url** – the URL of the endpoint
+
+         * **kwargs** – additional parameters
+
+      Returns:
+         "WebResponse"
+
+class viur.scriptor.requests.WebResponse(url, http_status_code, content)
+
+   represents the result of a "WebRequest", can have the requested
+   content or information about errors.
+
+   get_url()
+
+      returns the url that was requested
+
+      Returns:
+         the url that was requested
+
+   get_status_code()
+
+      returns the HTTP-status-code returned from the server
+
+      Returns:
+         the HTTP-status-code
+
+   get_content()
+
+      returns the content of the HTTP-response
+
+      Returns:
+         the content of the HTTP-response
+
+class viur.scriptor.dialog.Dialog
+
+   static print(*args, sep=' ', end='\n', file=None, flush=False)
+
+      displays Text
+
+      Parameters:
+         * **args** – "string" / "object"s that should be displayed.
+
+         * **sep** – "string" inserted between values, default a
+           space.
+
+         * **end** – "string" appended after the last value, default a
+           newline. ignored in browser.
+
+         * **file** – a file-like object (stream); defaults to the
+           current sys.stdout. ignored in browser.
+
+         * **flush** – whether to forcibly flush the stream. ignored
+           in browser.
+
+   async static alert(text: str, image=None)
+
+      Shows a message to the user and blocks until it is confirmed.
+
+      Parameters:
+         * **text** – The message to be displayed
+
+         * **image** – displays an image in the alert-box
+
+   async static select(options: dict[str, str] | list[str] | tuple[str], title: str = None, text: str = None, multiselect: bool = False, image=None)
+
+      Gives the user a choice between different options. If
+      multiselect is False, only one selection is allowed, otherwise
+      the user can select multiple options.
+
+      Parameters:
+         * **options** – the selectable options
+
+         * **title** – the title on top of the select-box
+
+         * **text** – the text to be displayed
+
+         * **multiselect** – if True, multiple options can be
+           selected, otherwise only one
+
+         * **image** – displays an image in the select-box
+
+      Returns:
+         a "tuple" of the selected options
+
+   async static confirm(text: str = None, title: str = None, yes: str = 'Yes', no: str = 'No')
+
+      Asks the user to answer a Yes/No Question
+
+      Parameters:
+         * **title** – the title on top of the confirm-box
+
+         * **text** – the text to be displayed
+
+         * **yes** – (optional) the word for ‘yes’
+
+         * **no** – (optional) the word for ‘no’
+
+      Returns:
+   async static text(prompt: str = None, title: str = 'Text Input', empty: bool = None, placeholder: str = None, image=None, multiline=False, default_value: str = None)
+
+      prompts the user to enter text
+
+      Parameters:
+         * **prompt** – the prompt the user will be shown
+
+         * **title** – the title of the textbox
+
+         * **empty** – allow the empty "string" as a valid result
+
+         * **image** – displays an image in the text-box
+
+         * **placeholder** – the placeholder-text to be displayed in
+           the textbox while it is empty
+
+         * **multiline** – enables multiline-input
+
+         * **default_value** – optional default value
+
+      Returns:
+         the text entered by the user
+
+   async static number(prompt: str = None, title: str = 'Number Input', image=None, default_value: int | float = None)
+
+      prompts the user to input a number
+
+      Parameters:
+         * **prompt** – the prompt the user will be shown
+
+         * **title** – the title of the number-box
+
+         * **number_type** – the type of expected number
+
+         * **image** – displays an image in the number-box
+
+         * **default_value** – optional default value
+
+      Returns:
+         the number the user entered
+
+   async static date(prompt: str = None, use_time: bool = False, image=None, default_value: str | date | datetime = None)
+
+      prompts the user to input a date
+
+      Parameters:
+         * **prompt** – the prompt the user will be shown
+
+         * **use_time** – also input time in addition to the date
+
+         * **image** – displays an image in the date-box
+
+         * **default_value** – optional default value
+
+      Returns:
+         the date entered by the user
+
+   async static show_diff(title: str, diffs: list[tuple[str, str, str]], image=None)
+
+      shows a diff-view to the user
+
+      Parameters:
+         * **title** – the title of the diff-box
+
+         * **diffs** – the data to be shown
+
+         * **image** – displays an image in the diff-box
+
+   async static table(header: list[str], rows: list[list[str]], select: bool = None, multiselect: bool = None, image=None)
+
+      displays a table
+
+      Parameters:
+         * **header** – the header of the table
+
+         * **rows** – the data of the tabel
+
+         * **select** – if True, the user can select a row
+
+         * **multiselect** – if True and select is True, the user can
+           select multiple rows
+
+         * **image** – displays an image in the table-box
+
+      Returns:
+         list of indices of selected items (if select is True)
+
+class viur.scriptor.progressbar.ProgressBar
+
+   static set(percent: int = 0, current_step: int = -1, total_steps: int = -1, text: str = '')
+
+      displays a progressbar in the browser, prints progress-
+      information in CLI
+
+      Parameters:
+         * **percent** – the percentage of the process that is
+           complete (a value between 0 and 100)
+
+         * **current_step** – the number of completed steps
+
+         * **total_steps** – the number of total steps
+
+         * **text** – additional text to be displayed
+
+   static unset()
+
+      removes the progressbar, does nothing in CLI
+
+class viur.scriptor.directory_handler.DirectoryHandler(directory_handle)
+
+   async classmethod open()
+
+      prompts the user to select a directory to work with.
+
+      Returns:
+         a "DirectoryHandler" for the selected directory
+
+   async list_files()
+
+      lists the files in the selected directory
+
+      Returns:
+         a "list" of all names of files present in the selected
+         directory
+
+   async list_subdirs()
+
+      lists the subdirectories in the selected directory
+
+      Returns:
+         a "list" of all names of subdirectories present in the
+         selected directory
+
+   async get_subdirectory_handler(dirname, create=False)
+
+      opens a subdirectory in a child-"DirectoryHandler"
+
+      Parameters:
+         * **dirname** – the name of the subdirectory that should be
+           opened
+
+         * **create** – if set to true, the directory will be created
+           if it doesn’t already exist
+
+      Returns:
+         "DirectoryHandler" for the subdirectory
+
+   async open_file_for_writing(filename: str, create: bool = True, may_already_exist: bool = False)
+
+      opens a file from the selected directory for writing. (the
+      content is completely replaced if the file already existed)
+
+      Parameters:
+         * **filename** – the name of the file to be written to
+
+         * **create** – if the file should be created if it doesn’t
+           already exist
+
+         * **may_already_exist** – if the file may already exist
+
+      Returns:
+         a "WritableFileFromDirectoryHandler" representing the
+         writable file
+
+   async close_all()
+
+      closes all open "WritableFileFromDirectoryHandler" originating
+      from this "DirectoryHandler" and all of its child-
+      DirectoryHandlers (after this, they can’t be written to anymore)
+
+      Intended to be called at the end of the script to make sure all
+      files are correctly saved.
+
+   async write_to_file(data: bytes, filename: str, may_already_exist: bool = False)
+
+      writes data to a file in this directory
+
+      Parameters:
+         * **data** – the data that should be the new content of the
+           file
+
+         * **filename** – the name of the file the data should be
+           written to
+
+         * **may_already_exist** – if the file may already exist and
+           should be replaced
+
+   async read_from_file(filename: str, start: int = 0, end: int = None)
+
+      reads data from a file
+
+      Parameters:
+         * **filename** – the name of the file data should be read
+           from
+
+         * **start** – the starting position in the file to read from
+
+         * **end** – the end position in the file to read to
+
+      Returns:
+         the content of the file (or a part thereof) as bytes
+
+class viur.scriptor.directory_handler.WritableFileFromDirectoryHandler(writable, parent, filename, file)
+
+   get_filename()
+
+      returns the name if the opened file
+
+      Returns:
+         the name of the opened file
+
+   async write(data: bytes)
+
+      writes data to the opened file
+
+      Parameters:
+         **data** – the data to write to the file
+
+   async close()
+
+      closes the file (data may not be persisted properly if the file
+      isn’t closed)
+
+class viur.scriptor.logger.Logger(name='scriptor')
+
+   The logger for the pyodide-context that logs to the browser.
+
+   log(level: str, msg: str, *args, **kwargs)
+
+      logs a message with the given log-level
+
+      Parameters:
+         * **level** – log-level (debug, info, warning, error,
+           critical or fatal)
+
+         * **msg** – the message to be logged
+
+         * **args** – additional arguments. ignored in browser.
+
+         * **kwargs** – additional keyword-arguments. ignored in
+           browser.
+
+   info(msg: str, *args, **kwargs)
+
+      logs a message with the log level ‘info’
+
+      Parameters:
+         * **msg** – the message to be logged
+
+         * **args** – additional arguments. ignored in browser.
+
+         * **kwargs** – additional keyword-arguments. ignored in
+           browser.
+
+   debug(msg: str, *args, **kwargs)
+
+      logs a message with the log level ‘debug’
+
+      Parameters:
+         * **msg** – the message to be logged
+
+         * **args** – additional arguments. ignored in browser.
+
+         * **kwargs** – additional keyword-arguments. ignored in
+           browser.
+
+   error(msg: str, *args, **kwargs)
+
+      logs a message with the log level ‘error’
+
+      Parameters:
+         * **msg** – the message to be logged
+
+         * **args** – additional arguments. ignored in browser.
+
+         * **kwargs** – additional keyword-arguments. ignored in
+           browser.
+
+   critical(msg: str, *args, **kwargs)
+
+      logs a message with the log level ‘critical’
+
+      Parameters:
+         * **msg** – the message to be logged
+
+         * **args** – additional arguments. ignored in browser.
+
+         * **kwargs** – additional keyword-arguments. ignored in
+           browser.
+
+   fatal(msg: str, *args, **kwargs)
+
+      logs a message with the log level ‘fatal’
+
+      Parameters:
+         * **msg** – the message to be logged
+
+         * **args** – additional arguments. ignored in browser.
+
+         * **kwargs** – additional keyword-arguments. ignored in
+           browser.
+
+   warn(msg: str, *args, **kwargs)
+
+      logs a message with the log level ‘warning’
+
+      Parameters:
+         * **msg** – the message to be logged
+
+         * **args** – additional arguments. ignored in browser.
+
+         * **kwargs** – additional keyword-arguments. ignored in
+           browser.
+
+   warning(msg: str, *args, **kwargs)
+
+      logs a message with the log level ‘warning’
+
+      Parameters:
+         * **msg** – the message to be logged
+
+         * **args** – additional arguments. ignored in browser.
+
+         * **kwargs** – additional keyword-arguments. ignored in
+           browser.
+
+   exception(msg: str, *args, exc_info: bool = True, **kwargs)
+
+      logs a message with the log level ‘fatal’.
+
+      the exc_info-argument is ignored in the browser.
+
+      Parameters:
+         * **msg** – the message to be logged
+
+         * **args** – additional arguments. ignored in browser.
+
+         * **exc_info** – if true, exception information will be
+           logged. ignored in browser.
+
+         * **kwargs** – additional keyword-arguments. ignored in
+           browser.
+
+   setLevel(level: str)
+
+      sets the minimal level of log-messages to be printed.
+
+      Parameters:
+         **level** – the minimal level of log-messages that should be
+         printed.
+
+class viur.scriptor.module.Modules(base_url: str, username: str, password: str, login_skey: str = None)
+
+   used to retrieve modules from the viur-backend
+
+   async get_module(module_name: str)
+
+      gets a modules from the viur-backend
+
+      Parameters:
+         **module_name** – the name of the module
+
+      Returns:
+         the module, either a "TreeModule", a "ListModule" or a
+         "SingletonModule"
+
+   get_base_url()
+
+      returns the base-url of the viur server
+
+      Returns:
+         the base-url of the viur server
+
+   async viur_request(method: str, url: str, params=None, renderer: str = None)
+
+      requests data from the viur server.
+
+      Parameters:
+         * **method** – one of “GET”, “POST”, “PUT”, “DELETE”, “PATCH”
+           or “SECURE_POST”
+
+         * **url** – the url of the requested resource
+
+         * **params** – additional parameters
+
+         * **renderer** – the viur-renderer for the requested data
+
+      Returns:
+         the requested data renderd by the renderer
+
+class viur.scriptor.module.ListModule(name: str, parent)
+
+   This class is not meant to be instantiated by the user. It is
+   returned by "module" for any modules that have multiple independent
+   records.
+
+   async preview(params: dict = None, group: str = '', **kwargs)
+
+      acts like add or edit, returns the same result, but doesn’t save
+      data to the database
+
+      Parameters:
+         * **params** – parameters to pass to the database
+
+         * **group** – the group
+
+         * **kwargs** – additional keyword-arguments
+
+      Returns:
+         the database-record that would have been created with
+         structure- and error-information
+
+   async structure(group: str = '', **kwargs)
+
+      returns the structure of the database-model
+
+      Parameters:
+         * **group** – applies group-specific modifiers to the
+           structure
+
+         * **kwargs** – additional keyword-arguments
+
+      Returns:
+         the structure of the database model
+
+   async view(key: str, group: str = '', **kwargs) -> dict
+
+      retrieves a single record from the database
+
+      Parameters:
+         * **key** – the key of the databse record
+
+         * **group** – filters result to only contain records
+           belonging to that group and applies group-specific
+           modifiers
+
+         * **kwargs** – additional keyword-arguments
+
+      Returns:
+         the retrieved record
+
+   async edit(key: str = '', params: dict = None, group: str = '', **kwargs)
+
+      writes changes to a database-record
+
+      Parameters:
+         * **key** – the key of the record to be edited
+
+         * **params** – parameters to pass to the database
+
+         * **group** – applied group-specific modifiers to the model
+
+         * **kwargs** – additional keyword-arguments
+
+      Returns:
+         the edited database-record with structure- and error-
+         information
+
+   async list(params: dict = None, group: str = '', **kwargs)
+
+      retrieves multiple records from the database (all if called
+      without parameters)
+
+      Parameters:
+         * **params** – parameters to pass to the database
+
+         * **group** – the group the records belong to
+
+         * **kwargs** – additional keyword-arguments
+
+      Returns:
+         an asynchronous generator yielding the retrieved records
+
+   async add(params: dict = None, group: str = '', **kwargs)
+
+      adds a record to the database
+
+      Parameters:
+         * **params** – parameters to pass to the database
+
+         * **group** – the group the records belong to
+
+         * **kwargs** – additional keyword-arguments
+
+      Returns:
+         the new record
+
+   property name: str
+
+      returns the name of the database-model
+
+      Returns:
+         the name of the database-model
+
+   async delete(key: str, params: dict = None, **kwargs)
+
+      deletes a record from the database
+
+      Parameters:
+         * **key** – the key of the record that will be deleted
+
+         * **params** – parameters to pass to the database
+
+         * **kwargs** – additional keyword-arguments
+
+      Returns:
+         "True" if the deletion was successful, otherwise raises an
+         exception
+
+class viur.scriptor.module.TreeModule(name: str, parent)
+
+   This class is not meant to be instantiated by the user. It is
+   returned by "module" for modules that have records in a tree-
+   structure.
+
+   async list_root_nodes(**kwargs)
+
+      return all root nodes (nodes without a parent)
+
+      Parameters:
+         **kwargs** – additional keyword-arguments
+
+      Returns:
+         list of dicts with the root-nodes names and keys
+
+   async move(key: str, parentNode: str, **kwargs)
+
+      moves a node to a new parent
+
+      Parameters:
+         * **key** – the key of the record that will be moved
+
+         * **parentNode** – the new parent the record will be moved to
+
+         * **kwargs** – additional keyword-arguments
+
+      Returns:
+         the edited database-record with structure- and error-
+         information
+
+   async for_each(callback: callable, root_node_key: str = None, params: dict = None, **kwargs)
+
+      retrieves records from the database, then calls a callback
+      function on each of them
+
+      Parameters:
+         * **callback** – the function to call on each retrieved
+           record (parameters are "skel_type" and "entry", both as
+           keyword-arguments, callback may be sync or async)
+
+         * **root_node_key** – the key of the root-node of which you
+           want to iterate all children
+
+         * **params** – parameters to pass to the database
+
+         * **kwargs** – additional keyword-arguments
+
+   async preview(params: dict = None, skel_type: str = '', **kwargs)
+
+      acts like add or edit, returns the same result, but doesn’t save
+      data to the database
+
+      Parameters:
+         * **params** – parameters to pass to the database
+
+         * **skel_type** – the skel_type of the record (either “node”
+           or “leaf”)
+
+         * **kwargs** – additional keyword-arguments
+
+      Returns:
+         the database-record that would have been created with
+         structure- and error-information
+
+   async structure(skel_type: str = '', **kwargs)
+
+      returns the structure of the database-model
+
+      Parameters:
+         * **kwargs** – additional keyword-arguments
+
+         * **skel_type** – the skel_type (either “node” or “leaf”)
+
+      Returns:
+         the structure of the database model
+
+   async view(key: str, skel_type: str = '', **kwargs) -> dict
+
+      retrieves a single record from the database
+
+      Parameters:
+         * **key** – the key of the databse record
+
+         * **skel_type** – the skel_type of the record (either “node”
+           or “leaf”)
+
+         * **kwargs** – additional keyword-arguments
+
+      Returns:
+         the retrieved record
+
+   async edit(key: str = '', params: dict = None, skel_type: str = '', **kwargs)
+
+      writes changes to a database-record
+
+      Parameters:
+         * **key** – the key of the record to be edited
+
+         * **params** – parameters to pass to the database
+
+         * **skel_type** – the skel_type of the record (either “node”
+           or “leaf”)
+
+         * **kwargs** – additional keyword-arguments
+
+      Returns:
+         the edited database-record with structure- and error-
+         information
+
+   async list(params: dict = None, skel_type: str = '', **kwargs)
+
+      retrieves multiple records from the database (all if called
+      without parameters)
+
+      Parameters:
+         * **params** – parameters to pass to the database
+
+         * **skel_type** – the skel_type of the record (either “node”
+           or “leaf”)
+
+         * **kwargs** – additional keyword-arguments
+
+      Returns:
+         an asynchronous generator yielding the retrieved records
+
+   async add(params: dict = None, skel_type: str = '', **kwargs)
+
+      adds a record to the database
+
+      Parameters:
+         * **params** – parameters to pass to the database
+
+         * **skel_type** – the skel_type of the record (either “node”
+           or “leaf”)
+
+         * **kwargs** – additional keyword-arguments
+
+      Returns:
+         the new record
+
+   property name: str
+
+      returns the name of the database-model
+
+      Returns:
+         the name of the database-model
+
+   async delete(key: str, params: dict = None, **kwargs)
+
+      deletes a record from the database
+
+      Parameters:
+         * **key** – the key of the record that will be deleted
+
+         * **params** – parameters to pass to the database
+
+         * **kwargs** – additional keyword-arguments
+
+      Returns:
+         "True" if the deletion was successful, otherwise raises an
+         exception
+
+class viur.scriptor.module.SingletonModule(name: str, parent)
+
+   This class is not meant to be instantiated by the user. It is
+   returned by "module" for modules of type “singleton”.
+
+   edit(params: dict = None, **kwargs)
+
+      saves changes to a record in the database
+
+      Parameters:
+         * **params** – parameters to pass to the database
+
+         * **kwargs** – additional keyword-arguments
+
+      Returns:
+         the edited database-record with structure- and error-
+         information
+
+   async preview(params: dict = None, **kwargs)
+
+      acts like add or edit, returns the same result, but doesn’t save
+      data to the database
+
+      Parameters:
+         * **params** – parameters to pass to the database
+
+         * **kwargs** – additional keyword-arguments
+
+      Returns:
+         the database-record that would have been created with
+         structure- and error-information
+
+   async structure(**kwargs)
+
+      returns the structure of the database-model
+
+      Parameters:
+         **kwargs** – additional keyword-arguments
+
+      Returns:
+         the structure of the database model
+
+   async view(key: str, **kwargs) -> dict
+
+      retrieves a single record from the database
+
+      Parameters:
+         * **key** – the key of the databse record
+
+         * **kwargs** – additional keyword-arguments
+
+      Returns:
+         the retrieved record
+
+   property name: str
+
+      returns the name of the database-model
+
+      Returns:
+         the name of the database-model
+
+viur.scriptor.utils.extract_items(data: list[...] | dict[...], selectors: list[str | int | ellipsis, ...], join_with: str = None)
+
+   extracts items from a data-structure using a "list" of selectors
+
+   Parameters:
+      * **data** – the data to extract from
+
+      * **selectors** – the selectors to extract the data
+
+      * **join_with** – the "string" with which items should be joined
+
+   Returns:
+      extracted data
+
+viur.scriptor.utils.map_extract_items(data: list[...] | dict[...], selector_mapping: dict[str, list[str | int | ellipsis, ...]], join_with: str = None)
+
+   extracts items from a data-structure using a mapping of "lists" of
+   selectors
+
+   Parameters:
+      * **data** – the data to extract from (a "dict" or a "list" of
+        "dict"s)
+
+      * **selector_mapping** – the selector-mapping to extract the
+        data
+
+      * **join_with** – the "string" with which items should be joined
+
+   Returns:
+      a "dictionary" of the extracted data
+
