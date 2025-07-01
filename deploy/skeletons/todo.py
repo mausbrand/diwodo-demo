@@ -68,6 +68,11 @@ class TodoSkel(skeleton.Skeleton):
         },
     )
 
+    proposed_user = UserBone(
+         descr="Vorschlag (KI)",
+         readOnly=True,
+    )
+
     user = UserBone(
          descr="Zugewiesen an",
     )

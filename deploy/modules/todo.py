@@ -1,3 +1,4 @@
+import logging
 import base64
 from viur.core.prototypes import List
 from viur.core import conf, current, utils, exposed, skey, access, tasks
@@ -87,6 +88,7 @@ class Todo(List):
 
         skel.summary = None
         skel.status = None
+        skel.proposed_user = None
         skel.user = None
         skel.due_date = None
 
@@ -95,6 +97,8 @@ class Todo(List):
     def onAdded(self, skel):
         if skel["attachments"]:
             self._ai_summary(skel["key"])
+        else:
+            self._ai_propose(skel["key"])
 
         super().onAdded(skel)
 
@@ -207,6 +211,47 @@ class Todo(List):
         )
 
         skel.patch({"summary": answer})
+        self._ai_propose(key)
+
+    @tasks.CallDeferred
+    def _ai_propose(self, key):
+        assert (skel := self.skel().read(key))
+
+        # Fetch all field users and their skills
+        q = conf.main_app.user.skel().all()
+        q.filter("roles", "field")
+
+        user_skills = {}
+        for user_skel in q.fetch():
+            if skills := user_skel["skills"]:
+                user_skills[str(user_skel["key"])] = skills
+
+        answer = conf.main_app.assistant.openai_create_completion(
+            model=conf.main_app.assistant.getContents()["openai_model"],
+            messages=[{
+                "role": "user",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": f"""
+                            Es folgt eine Liste an Keys mit entsprechenden Qualifikationen:
+                            {"\n".join(f"{key}: {",".join(value)}" for key, value in user_skills.items())}
+
+                            Jeder Key entspricht einem Menschen der diese Fähigkeiten hat.
+                            Welcher dieser Menschen passt am besten zu dem nachfolgend beschriebenem Problem?
+                            {skel["summary"] or skel["message"]}
+
+                            Antwort bitte JSON-kodiert, nur den Key des Menschen. Wenn kein passender Mensch gefunden wird, Leerstring.
+                        """
+                    }
+                ],
+            }],
+        )
+
+        if answer:
+            skel.patch({"proposed_user": answer})
+        else:
+            logging.info("No proposed_user found for this problem!")
 
 
 Todo.html = True
