@@ -7,21 +7,27 @@ from viur.core.bones import *
 
 
 class Todo(List):
+    """
+    Module for managing todo requests and tasks for
+    """
+    COLUMNS = (
+        "creationdate",
+        "lastname",
+        "facility",
+        "phone",
+        "message",
+        "summary",
+        "user",
+    )
+
     adminInfo = {
         "icon": "file-check-fill",
-        "columns": (
-            "creationdate",
-            "lastname",
-            "firstname",
-            "facility",
-            "phone",
-            "message",
-            "user",
-        ),
+        "columns": ("status", "category") + COLUMNS,
         "views": [
             {
                 "name": "Service - Neu",
                 "icon": "hammer",
+                "columns": COLUMNS,
                 "filter": {
                     "category": "service",
                     "status": "new",
@@ -63,6 +69,20 @@ class Todo(List):
         return True  # everyone can add entries!
 
     def addSkel(self):
+        '''
+        skel = self.skel(
+            bones=(
+                "category",
+                "firstname",
+                "lastname",
+                "phone",
+                "facility",
+                "message",
+                "attachments",
+            )
+        )
+        '''
+
         skel = super().addSkel().clone()
 
         skel.summary = None
@@ -74,7 +94,9 @@ class Todo(List):
 
     def onAdded(self, skel):
         if skel["attachments"]:
-            self._enrich_with_image_contents(skel["key"])
+            self._ai_summary(skel["key"])
+
+        super().onAdded(skel)
 
     def listFilter(self, query):
         if query := super().listFilter(query):
@@ -133,20 +155,19 @@ class Todo(List):
 
         return self.render.render("assignSuccess", action_skel)
 
-    # @tasks.CallDeferred
-    @exposed
-    def enrich_with_image_contents(self, key):
+    @tasks.CallDeferred
+    def _ai_summary(self, key):
         assert (skel := self.skel().read(key))
 
         content = [
             {
                 "type": "text",
                 "text": (
-                    "Erstelle zu folgenden Bildern eine fachmännische Beschreibung."
-                    "Die Beschreibung soll nicht auf einzelne Bilder hinweisen sondern das Gesamtbild beschreiben."
-                    "Vermeide es, auf Ursachen hinzuweisen, sondern beschreibe möglichst genau die Situation und Komponenten."
-                    "Farben sind dabei nicht relevant, es geht um Zustand und Bezeichnung."
-                    "Die Beschreibung soll bereits maßgeschneidert für einen Fachmann sein."
+                    "Erstelle aus der nachfolgenden Anfrage und den Bildern eine fachmännische Zusammenfassung des Problems."
+                    "Die Zusammenfassung soll das Gesamtbild der Anfrage und der Fotos beschreiben."
+                    "Die Zusammenfassung soll bereits maßgeschneidert für einen Fachmann sein."
+                    "Vermeide es auf Ursachen zu schließen. Erstelle eine Momentaufnahme, eine Ist-Situation."
+                    "Keine Spekulation über Ursachen oder Vorschläge zur Verbesserung."
                     f"Hier die Anfrage: {skel["message"]}"
                 ),
             },
