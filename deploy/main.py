@@ -21,9 +21,9 @@
 #
 # ------------------------------------------------------------------------------
 
-from viur.core import conf, securityheaders, current, setup, setDefaultLanguage
+from viur.core import conf, secret, securityheaders, current, setup, setDefaultLanguage
 from viur.core.config import ConfigType
-
+from viur.assistant import CONFIG as ASSISTANT_CONFIG
 
 # ------------------------------------------------------------------------------
 # Project-specific configuration
@@ -122,7 +122,8 @@ conf.user.roles = {
 #
 
 # conf.i18n.language_method = "url"
-# conf.i18n.available_languages = ["en", "de"]
+conf.i18n.available_languages.clear()
+conf.i18n.available_languages.append("de")
 
 # ------------------------------------------------------------------------------
 # Admin specific configurations
@@ -224,6 +225,13 @@ if conf.instance.is_dev_server:
         current.request.get().response.headers["Access-Control-Allow-Credentials"] = "true"
         return path
     conf.request_preprocessor = vuejs_cors_allow_all
+
+# ------------------------------------------------------------------------------
+# AI assistants
+#
+
+ASSISTANT_CONFIG.api_openai_key = secret.get("api_openai_key")
+ASSISTANT_CONFIG.api_anthropic_key = secret.get("anthropic_api_key")
 
 # ------------------------------------------------------------------------------
 # Server startup

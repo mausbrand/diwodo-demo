@@ -46,8 +46,14 @@ class TodoSkel(skeleton.Skeleton):
     )
 
     attachments = FileBone(
-        descr="Anhänge",
+        descr="Fotos",
         multiple=True,
+    )
+
+    summary = RawBone(
+        descr="Zusammenfassung (KI)",
+        readOnly=True,
+        indexed=False,
     )
 
     status = SelectBone(

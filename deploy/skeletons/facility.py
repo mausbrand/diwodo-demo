@@ -1,5 +1,6 @@
 from viur.core import skeleton, utils
 from viur.core.bones import *
+from viur.assistant.bones.image import ImageBone
 
 
 class FacilitySkel(skeleton.Skeleton):
@@ -18,6 +19,7 @@ class FacilitySkel(skeleton.Skeleton):
     image = ImageBone(
         descr="Bild",
         required=True,
+        public=True,
     )
 
     city = StringBone(

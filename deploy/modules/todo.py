@@ -1,5 +1,7 @@
+import base64
 from viur.core.prototypes import List
-from viur.core import current, utils, exposed, skey, access
+from viur.core import conf, current, utils, exposed, skey, access, tasks
+from viur.assistant import CONFIG as ASSISTANT_CONFIG
 from viur.core.skeleton import RelSkel as ActionSkel  # TODO: ActionSkel
 from viur.core.bones import *
 
@@ -63,11 +65,16 @@ class Todo(List):
     def addSkel(self):
         skel = super().addSkel().clone()
 
+        skel.summary = None
         skel.status = None
         skel.user = None
         skel.due_date = None
 
         return skel
+
+    def onAdded(self, skel):
+        if skel["attachments"]:
+            self._enrich_with_image_contents(skel["key"])
 
     def listFilter(self, query):
         if query := super().listFilter(query):
@@ -125,6 +132,60 @@ class Todo(List):
             )
 
         return self.render.render("assignSuccess", action_skel)
+
+    # @tasks.CallDeferred
+    @exposed
+    def enrich_with_image_contents(self, key):
+        assert (skel := self.skel().read(key))
+
+        content = [
+            {
+                "type": "text",
+                "text": (
+                    "Erstelle zu folgenden Bildern eine fachmännische Beschreibung."
+                    "Die Beschreibung soll nicht auf einzelne Bilder hinweisen sondern das Gesamtbild beschreiben."
+                    "Vermeide es, auf Ursachen hinzuweisen, sondern beschreibe möglichst genau die Situation und Komponenten."
+                    "Farben sind dabei nicht relevant, es geht um Zustand und Bezeichnung."
+                    "Die Beschreibung soll bereits maßgeschneidert für einen Fachmann sein."
+                    f"Hier die Anfrage: {skel["message"]}"
+                ),
+            },
+        ]
+
+        for image in skel["attachments"]:
+            if image["dest"]["mimetype"].startswith("image/"):
+                file_key = image["dest"]["key"]
+
+                blob, mime = conf.main_app.file.read(key=file_key)
+                if not blob:
+                    raise errors.NotFound(f"File not found with {file_key=!r}")
+
+                resized_image_bytes = conf.main_app.assistant._get_resized_image_bytes(
+                    image=blob,
+                    target_pixel_count=ASSISTANT_CONFIG.describe_image_pixel_default,
+                    jpeg_quality=ASSISTANT_CONFIG.describe_image_jpeg_quality_default,
+                )
+                base64_image = base64.b64encode(resized_image_bytes).decode("utf-8")
+
+                content.append(
+                    {
+                        "type": "image_url",
+                        "image_url": {
+                            "url": f"data:image/jpeg;base64,{base64_image}",
+                            "detail": "low",
+                        },
+                    }
+                )
+
+        answer = conf.main_app.assistant.openai_create_completion(
+            model=conf.main_app.assistant.getContents()["openai_model"],
+            messages=[{
+                "role": "user",
+                "content": content,
+            }],
+        )
+
+        skel.patch({"summary": answer})
 
 
 Todo.html = True

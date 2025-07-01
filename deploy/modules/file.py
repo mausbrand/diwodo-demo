@@ -18,8 +18,9 @@ class File(File):
             repository = self.ensureOwnModuleRootNode()
 
             return [{
-                "name": i18n.translate("Files"),
-                "key": repository.key
+                "name": i18n.translate("Files", defaultText="Dateien"),
+                "key": repository.key,
+                "public": True,
             }]
 
         return []
