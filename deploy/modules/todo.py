@@ -241,7 +241,8 @@ class Todo(List):
                             Welcher dieser Menschen passt am besten zu dem nachfolgend beschriebenem Problem?
                             {skel["summary"] or skel["message"]}
 
-                            Antwort bitte JSON-kodiert, nur den Key des Menschen. Wenn kein passender Mensch gefunden wird, Leerstring.
+                            Antwort bitte JSON-kodiert, nur den Key des Menschen.
+                            Wenn kein passender Mensch gefunden wird, Leerstring.
                         """
                     }
                 ],
