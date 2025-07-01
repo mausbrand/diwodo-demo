@@ -13,16 +13,11 @@ class TodoSkel(skeleton.Skeleton):
         required=True,
     )
 
-    building = SelectBone(
-        descr="Gebäude",
+    facility = RelationalBone(
+        descr="Anlage",
+        kind="facility",
         required=True,
-        values=(
-            "Kanalhafen",
-            "Kohlenhafen",
-            "Petroleumhafen",
-            "Stadthafen",
-            "Südhafen",
-        )
+        type_suffix="select",
     )
 
     category = SelectBone(
@@ -50,6 +45,11 @@ class TodoSkel(skeleton.Skeleton):
         validHtml=None,
     )
 
+    attachments = FileBone(
+        descr="Anhänge",
+        multiple=True,
+    )
+
     status = SelectBone(
         descr="Status",
         required=True,
@@ -64,4 +64,8 @@ class TodoSkel(skeleton.Skeleton):
 
     user = UserBone(
          descr="Zugewiesen an",
+    )
+
+    due_date = DateBone(
+        descr="Fällig bis",
     )

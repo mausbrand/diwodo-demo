@@ -11,6 +11,7 @@ class Todo(List):
             "creationdate",
             "lastname",
             "firstname",
+            "facility",
             "phone",
             "message",
             "user",
@@ -50,6 +51,7 @@ class Todo(List):
     roles = {
         "field": ["edit", "view"],
         "indoor": ["*"],
+        "admin": ["*"],
     }
 
     addTemplate = "todo_add"
@@ -60,8 +62,11 @@ class Todo(List):
 
     def addSkel(self):
         skel = super().addSkel().clone()
+
         skel.status = None
         skel.user = None
+        skel.due_date = None
+
         return skel
 
     def listFilter(self, query):
