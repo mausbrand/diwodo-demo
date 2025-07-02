@@ -157,6 +157,7 @@ securityheaders.addCspRule("script-src", "buttons.github.io", "enforce")
 securityheaders.addCspRule("script-src", "unsafe-eval", "enforce")
 securityheaders.addCspRule("connect-src", "data:", "enforce")
 securityheaders.addCspRule("connect-src", "api.github.com", "enforce")
+securityheaders.addCspRule("connect-src", "*.googleapis.com", "enforce")
 
 # Enable this if you want to use the captcha, but not unsafe-inline:
 # securityheaders.addCspRule("script-src", "sha256-TLq3i7CjxmHUoz+BrQ6w5D2+hv35BEkew240zhZ0uvA=", "enforce")
@@ -220,10 +221,12 @@ if conf.instance.is_dev_server:
     securityheaders.addCspRule("connect-src", "ws://localhost:8081", "enforce")
     securityheaders.addCspRule("img-src", "http://localhost:8081", "enforce")
     securityheaders.addCspRule("connect-src","*","enforce")
+
     def vuejs_cors_allow_all(path):
         current.request.get().response.headers["Access-Control-Allow-Origin"] = "http://localhost:8081"
         current.request.get().response.headers["Access-Control-Allow-Credentials"] = "true"
         return path
+
     conf.request_preprocessor = vuejs_cors_allow_all
 
 # ------------------------------------------------------------------------------
