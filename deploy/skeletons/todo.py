@@ -50,7 +50,7 @@ class TodoSkel(skeleton.Skeleton):
         multiple=True,
     )
 
-    summary = RawBone(
+    summary = TextBone(
         descr="Zusammenfassung (KI)",
         readOnly=True,
         indexed=False,
@@ -71,6 +71,12 @@ class TodoSkel(skeleton.Skeleton):
     proposed_user = UserBone(
          descr="Vorschlag (KI)",
          readOnly=True,
+    )
+
+    proposed_user_why = TextBone(
+        descr="Vorschlags-Begründung (KI)",
+        readOnly=True,
+        indexed=False,
     )
 
     user = UserBone(

@@ -1,5 +1,6 @@
 import logging
 import base64
+import json
 from viur.core.prototypes import List
 from viur.core import conf, current, utils, exposed, skey, access, tasks
 from viur.assistant import CONFIG as ASSISTANT_CONFIG
@@ -173,6 +174,7 @@ class Todo(List):
                     "Vermeide es auf Ursachen zu schließen. Erstelle eine Momentaufnahme, eine Ist-Situation."
                     "Keine Spekulation über Ursachen oder Vorschläge zur Verbesserung."
                     f"Hier die Anfrage: {skel["message"]}"
+                    "Antwort als HTML, wo für Zeilenumbrüche <br> benutzt wird, ansonsten keine anderen Tags."
                 ),
             },
         ]
@@ -237,12 +239,15 @@ class Todo(List):
                             Es folgt eine Liste an Keys mit entsprechenden Qualifikationen:
                             {"\n".join(f"{key}: {",".join(value)}" for key, value in user_skills.items())}
 
-                            Jeder Key entspricht einem Menschen der diese Fähigkeiten hat.
-                            Welcher dieser Menschen passt am besten zu dem nachfolgend beschriebenem Problem?
+                            Jeder Key entspricht einem Mitarbeiter der diese Fähigkeiten hat.
+                            Welcher dieser Mitarbeiter passt am besten zu dem nachfolgend beschriebenem Problem?
                             {skel["summary"] or skel["message"]}
 
-                            Antwort bitte JSON-kodiert, nur den Key des Menschen.
-                            Wenn kein passender Mensch gefunden wird, Leerstring.
+                            Antwort JSON-kodiert als Objekt:
+                            - Schlüssel "key" mit dem Key als Wert des passenden Menschen,
+                            - Schlüssel "reason" mit einem kurzen Text als Begründung, warum dieser Mitarbeiter.
+
+                            Wenn kein passender Mitarbeiter gefunden wird, ein leeres JSON-Objekt ({{}}) liefern.
                         """
                     }
                 ],
@@ -250,9 +255,23 @@ class Todo(List):
         )
 
         if answer:
-            skel.patch({"proposed_user": answer})
+            answer = json.loads(answer)
+            logging.info(f"{answer=}")
+
+            skel.patch({
+                "proposed_user": answer["key"],
+                "proposed_user_why": answer["reason"]
+            })
         else:
             logging.info("No proposed_user found for this problem!")
+
+    # @exposed
+    # def ai_summary(self, key):
+    #     self._ai_summary(key)
+
+    # @exposed
+    # def ai_propose(self, key):
+    #     self._ai_propose(key)
 
 
 Todo.html = True

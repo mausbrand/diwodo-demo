@@ -47,7 +47,7 @@ class ProjectConfig(ConfigType):
     """Maintenance mode"""
 
     appnames = {
-        "diwodo-demo-viur3": "DiWoDo 2024",
+        "diwodo-demo-viur3": "DigiDay 2025",
     }
 
     main_url = None if conf.instance.is_dev_server else "https://www.example.com"

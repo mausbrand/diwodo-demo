@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 # viur-core = {extras = ["mailjet"], path = "../viur-core", editable = true}
-# viur-core = "==3.8.0.dev7"
+viur-core = "==3.8.0.dev8"
 viur-assistant = "*"
 
 [dev-packages]

@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "323adb4e3b9e399b292bfc1a835e6d1313a5d476f6bc4cde4cab3c0a75bce574"
+            "sha256": "6684a3501272566512ff4eada3a590c23b09678a0193b66419643cfacceeace7"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -26,11 +26,11 @@
         },
         "anthropic": {
             "hashes": [
-                "sha256:3518433fc0372a13f2b793b4cabecc7734ec9176e063a0f28dac19aa17c57f94",
-                "sha256:61826efa1bda0e4c7dc6f6a0d82b7d99b3fda970cd048d40ef5fca08a5eabd33"
+                "sha256:56fa9eb61afa004a1664bc85eed071e77b96c579b77395e9cc893097e599f72e",
+                "sha256:91f1f74abdcf0958d3296b657304588cc244b1107b89f973ff6f511afdacfc56"
             ],
             "markers": "python_version >= '3.8'",
-            "version": "==0.55.0"
+            "version": "==0.56.0"
         },
         "anyio": {
             "hashes": [
@@ -624,21 +624,6 @@
             ],
             "markers": "python_version >= '3.8'",
             "version": "==2.6.3"
-        },
-        "logics-py": {
-            "hashes": [
-                "sha256:e8eef06497d43e4a8e124386f3d2bd468efb5780c835d051754e2f3737e882fe"
-            ],
-            "markers": "python_version >= '3.10'",
-            "version": "==0.0.12"
-        },
-        "mailjet-rest": {
-            "hashes": [
-                "sha256:1c5313208ba2d78bda6d60600a2fbd2699fb835191578d50b94332d83a2ff219",
-                "sha256:76ff9f2fc748045dd0577cf4e4b08f0366b77e58d6ff7a45cdf74b9604ee2da8"
-            ],
-            "markers": "python_version >= '3.9'",
-            "version": "==1.4.0"
         },
         "markupsafe": {
             "hashes": [
@@ -1396,12 +1381,13 @@
             "version": "==1.2.0"
         },
         "viur-core": {
-            "editable": true,
-            "extras": [
-                "mailjet"
+            "hashes": [
+                "sha256:552bfa00ff893c73d1a7e19397270a1107985a2cb9645d0cebadccf0af692453",
+                "sha256:89e0e2c9006f4eb2af4a75bb68269777c32ae8ae2acbfb5180ac7c4a596a6142"
             ],
+            "index": "pypi",
             "markers": "python_version >= '3.10'",
-            "path": "../viur-core"
+            "version": "==3.8.0.dev8"
         },
         "webob": {
             "hashes": [
