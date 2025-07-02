@@ -90,6 +90,7 @@ class Todo(List):
         skel.summary = None
         skel.status = None
         skel.proposed_user = None
+        skel.proposed_user_why = None
         skel.user = None
         skel.due_date = None
 
