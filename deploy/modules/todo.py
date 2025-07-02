@@ -165,20 +165,7 @@ class Todo(List):
     def _ai_summary(self, key):
         assert (skel := self.skel().read(key))
 
-        content = [
-            {
-                "type": "text",
-                "text": (
-                    "Erstelle aus der nachfolgenden Anfrage und den Bildern eine fachmännische Zusammenfassung des Problems."
-                    "Die Zusammenfassung soll das Gesamtbild der Anfrage und der Fotos beschreiben."
-                    "Die Zusammenfassung soll bereits maßgeschneidert für einen Fachmann sein."
-                    "Vermeide es auf Ursachen zu schließen. Erstelle eine Momentaufnahme, eine Ist-Situation."
-                    "Keine Spekulation über Ursachen oder Vorschläge zur Verbesserung."
-                    f"Hier die Anfrage: {skel["message"]}"
-                    "Antwort als HTML, wo für Zeilenumbrüche <br> benutzt wird, ansonsten keine anderen Tags."
-                ),
-            },
-        ]
+        content = []
 
         for image in skel["attachments"]:
             if image["dest"]["mimetype"].startswith("image/"):
@@ -205,6 +192,30 @@ class Todo(List):
                     }
                 )
 
+        content.append({
+            "type": "text",
+            "text": (
+                f"""
+                Du bist ein erfahrener Bausachverständiger.
+                Analysiere den folgenden Freitext {"im Zusammenhang mit den Fotos" if content else ""}:
+
+                {skel["message"]}
+
+                Auftrag:
+                Verfasse eine fachgerechte Momentaufnahme (Ist-Situation) des gemeldeten Schadens / Mangels.
+                Gib ausschließlich objektive Beobachtungen wieder.
+                Keine Vermutungen zu Ursachen, Empfehlungen oder Verbesserungsvorschläge.
+                Verwende neutrale deutsche Fachsprache; übersetze internationale Fachbegriffe ins Deutsche.
+                Lass unklare oder widersprüchliche Angaben unkommentiert;
+                Beschreibe nur, was eindeutig erkennbar ist.
+                Maximal 200 Wörter, bei zu wenig Eingabe reicht ein Satz.
+
+                Erzeuge HTML als Ausgabe, aber nur <br> für Absatzumbrüche, keine anderen HTML-Tags.
+                Bitte mehrere kurze Absätze generieren.
+                """
+            ),
+        })
+
         answer = conf.main_app.assistant.openai_create_completion(
             model=conf.main_app.assistant.getContents()["openai_model"],
             messages=[{
@@ -212,6 +223,8 @@ class Todo(List):
                 "content": content,
             }],
         )
+
+        logging.info(f"{answer=}")
 
         skel.patch({"summary": answer})
         self._ai_propose(key)
@@ -237,16 +250,27 @@ class Todo(List):
                     {
                         "type": "text",
                         "text": f"""
-                            Es folgt eine Liste an Keys mit entsprechenden Qualifikationen:
+                            Du bist ein intelligenter Matching-Assistent.
+                            Zuerst erhältst du eine Liste von Mitarbeitern mit ihren Fähigkeiten:
+
                             {"\n".join(f"{key}: {",".join(value)}" for key, value in user_skills.items())}
 
-                            Jeder Key entspricht einem Mitarbeiter der diese Fähigkeiten hat.
-                            Welcher dieser Mitarbeiter passt am besten zu dem nachfolgend beschriebenem Problem?
+                            Danach folgt eine Freitext-Problembeschreibung:
+
                             {skel["summary"] or skel["message"]}
 
+                            Jetzt kommt deine Aufgabe:
+                            Berücksichtige exakte sowie sinnvolle Teilwort-Übereinstimmungen;
+                            Groß-/Kleinschreibung darf nicht ignoriert werden.
+                            Ziehe semantische Ähnlichkeiten (Synonyme, Ober-/Unterbegriffe) eigenständig heran;
+                            es gibt kein Wörterbuch.
+                            Deckt kein Mitarbeiter alle Anforderungen ab, gib denjenigen mit den meisten passenden
+                            Teiltreffern zurück; bei Gleichstand wähle den zuerst gelisteten.
+
                             Antwort JSON-kodiert als Objekt:
-                            - Schlüssel "key" mit dem Key als Wert des passenden Menschen,
-                            - Schlüssel "reason" mit einem kurzen Text als Begründung, warum dieser Mitarbeiter.
+                            - Schlüssel "key" mit dem Key als Wert des passenden Mitarbeiters,
+                            - Schlüssel "reason" mit einem kurzen Text als Begründung, warum dieser Mitarbeiter
+                              (maximal 100 Wörter)
 
                             Wenn kein passender Mitarbeiter gefunden wird, ein leeres JSON-Objekt ({{}}) liefern.
                         """
