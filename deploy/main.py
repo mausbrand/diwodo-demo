@@ -14,7 +14,7 @@
 #   I N F O R M A T I O N    S Y S T E M
 # ------------------------------------------------------------------------------
 #
-# Project:      diwodo-demo-viur3
+# Project:      Digiday 2025
 # Initiated:    2024-09-06 01:10:53
 # Copyright:    Mausbrand @ Mausbrand Informationssysteme GmbH
 # Author:       Mausbrand
