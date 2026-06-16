@@ -29,14 +29,14 @@ indexes:
 - kind: todo
   properties:
   - name: category
-  - name: creationdate
-    direction: desc
+  - direction: desc
+    name: creationdate
 
 - kind: todo
   properties:
   - name: user.dest.__key__
-  - name: creationdate
-    direction: desc
+  - direction: desc
+    name: creationdate
 
 - kind: viur-emails
   properties:
@@ -60,6 +60,12 @@ indexes:
   - name: viur_foreign_keys
   - name: viur_relational_updateLevel
   - name: viur_delayed_update_tag
+
+- kind: viur-relations
+  properties:
+  - name: src.__key__
+  - name: viur_src_kind
+  - name: viur_src_property
 
 - kind: viur-script-leaf
   properties:

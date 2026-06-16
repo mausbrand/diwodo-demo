@@ -1,0 +1,20 @@
+[project]
+name = "digiday"
+version = "1.0.0"
+description = "DigiDay ViUR Backend"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "viur-core[mailjet]==3.9.0.dev4",
+    "viur-assistant",
+]
+
+[dependency-groups]
+dev = [
+    "autopep8~=2.3.0",
+    "pycodestyle~=2.10",
+    "viur-cli~=2.2.1",
+]
+
+[tool.uv.sources]
+# viur-core = { path = "../viur-core", editable = true }

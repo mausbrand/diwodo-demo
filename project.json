@@ -5,9 +5,9 @@
         "builds": {
             "admin": {
                 "clean": "rm -rf deploy/admin",
-                "command": "viur package install admin",
+                "command": "viur package install admin 4.14.4",
                 "kind": "exec",
-                "version": "4.8.40"
+                "version": "4.14.4"
             },
             "app": {
                 "command": "build",
@@ -24,8 +24,5 @@
         "sources_folder": "./sources",
         "version": "$(year)-$(month)-$(day)-$(user)-dev"
     },
-    "format": "2.0.0",
-    "live": {
-        "version": "$(year)-$(month)-$(day)-$(user)"
-    }
+    "format": "2.0.0"
 }

@@ -6,22 +6,24 @@ Die Keynote wurde auch im Livestream übertragen und kann [bei YouTube angeschau
 
 ## Schnellstart
 
-Dieses Projekt wurde entwickelt und getestet mit:
-
-- Python 3.12.6
-- gcloud 494.0.0
-  - app-engine-python
-  - app-engine-python-extras
-- pipenv 2024.0.2
-- npm 10.8.3
-
-Projekt bauen und starten:
+Dieses Projekt benutzt uv als Build-Umgebung:
 
 ```sh
-$ pipenv install --dev
-$ pipenv shell
-$ viur build release
-$ viur run
+`uv sync --dev`
+`uv run viur build release`
+```
+
+## Lokal starten
+
+```sh
+$ uv run viur run
+```
+
+## Deployment
+
+```sh
+$ uv run viur build release
+$ uv run viur cloud deploy app
 ```
 
 > [!IMPORTANT]
@@ -31,7 +33,7 @@ $ viur run
 
 ## Lizenz
 
-Copyright © 2024 Mausbrand Informationssysteme GmbH.<br>
+Copyright © 2026 Mausbrand Informationssysteme GmbH.<br>
 Mausbrand und ViUR sind eingetragene Marken der Mausbrand Informationssysteme GmbH.
 
 Lizenziert unter der MIT Lizenz. Siehe LICENSE für weitere Informationen.

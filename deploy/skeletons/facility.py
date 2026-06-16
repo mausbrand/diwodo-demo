@@ -13,12 +13,10 @@ class FacilitySkel(skeleton.Skeleton):
 
     descr = TextBone(
         descr="Beschreibung",
-        required=True,
     )
 
     image = ImageBone(
         descr="Bild",
-        required=True,
         public=True,
     )
 
