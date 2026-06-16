@@ -9,8 +9,8 @@ Die Keynote wurde auch im Livestream übertragen und kann [bei YouTube angeschau
 Dieses Projekt benutzt uv als Build-Umgebung:
 
 ```sh
-`uv sync --dev`
-`uv run viur build release`
+$ uv sync --dev
+$ uv run viur build release
 ```
 
 ## Lokal starten
